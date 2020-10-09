@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import LoginContainer from './Login/LoginContainer';
-import Home from '../components/home/Home';
+import HomeContainer from './Home/HomeContainer';
 import ActionContainer from './Action/ActionContainer';
 import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
-    screen: Home,
+    screen: HomeContainer,
     navigationOptions: {
       tabBarLabel: "Trang chủ",
       tabBarIcon: () => (

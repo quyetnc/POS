@@ -17,7 +17,7 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Trang chủ",
       tabBarIcon: () => (
-        <Icon name='home' size={20} color="green" />
+        <Icon name='home' size={20} color="#4dbd73" />
       ),
     },
   },
@@ -26,7 +26,7 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Mở rộng",
       tabBarIcon: () => (
-        <Icon name='ellipsis-h' size={20} color='green' />
+        <Icon name='ellipsis-h' size={20} color='#4dbd73' />
       ),
     },
   },
@@ -35,7 +35,7 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Hệ thống',
       tabBarIcon: () => (
-        <Icon name='cog' size={20} color='green' />
+        <Icon name='cog' size={20} color='#4dbd73' />
       )
     }
   },

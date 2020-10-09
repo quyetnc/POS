@@ -14,6 +14,8 @@ import {Sizes} from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
 import {colors} from '../../res/values/styles/color';
+import RegisterDeviceModal from './RegisterDeviceModal';
+import ViewOpaticy from '../Custom/ViewOpaticy'
 export default class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -26,11 +28,30 @@ export default class LoginComponent extends React.Component {
       valueOutlet: [],
       passCode: '',
       visibleRegister: false,
+      opacityView : false
     };
   }
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        {this.state.opacityView === true ? (
+         <ViewOpaticy/>
+        ) : (
+          <View />
+        )}
+
+        <RegisterDeviceModal
+          visibleRegister = {this.state.visibleRegister}
+          valueProperty={this.state.valueProperty}
+          valueOutlet={this.state.valueOutlet}
+          setPropertySelection={(text) =>
+            this.setState({propertySelection: text})
+          }
+          setOutletSelection={(text) => this.setState({outletSelection: text})}
+          propertySelection={this.state.propertySelection}
+          outletSelection={this.state.outletSelection}
+          offModal = {() => this.setState({visibleRegister : false, opacityView :false})}
+        />
         <ScrollView
           contentContainerStyle={[{justifyContent: 'center', flexGrow: 1}]}>
           <View style={{alignItems: 'center'}}>
@@ -47,7 +68,6 @@ export default class LoginComponent extends React.Component {
                 alignSelf: 'center',
                 borderRadius: Sizes.s35,
                 borderColor: colors.black,
-                height: Sizes.s60,
               }}
               data={this.state.valueProperty} //lable
               noDataMessage="Dữ Liệu Trống"
@@ -66,7 +86,6 @@ export default class LoginComponent extends React.Component {
                 alignSelf: 'center',
                 borderRadius: Sizes.s35,
                 borderColor: colors.black,
-                height: Sizes.s60,
               }}
               data={this.state.valueProperty} //lable
               noDataMessage="Dữ Liệu Trống"
@@ -90,8 +109,8 @@ export default class LoginComponent extends React.Component {
                   borderWidth: 1,
                   borderRadius: Sizes.s35,
                   borderColor: colors.black,
-                  height: Sizes.s60,
                   paddingHorizontal: Sizes.s25,
+                  paddingVertical: Sizes.s20,
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
@@ -132,7 +151,8 @@ export default class LoginComponent extends React.Component {
             </View>
 
             <TouchableOpacity
-              style={{alignItems: 'center', marginTop: Sizes.s5}}>
+              style={{alignItems: 'center', marginTop: Sizes.s5}}
+              onPress = {()=>{this.setState({opacityView:true, visibleRegister : true})}}>
               <Text style={{fontWeight: 'bold'}}>Register Device</Text>
             </TouchableOpacity>
           </View>

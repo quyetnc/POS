@@ -5,25 +5,31 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import LoginContainer from './LoginContainer'
-import WelcomeScreen from '../components/welcomeScreen/WelcomeScreen';
-
 import Home from '../components/home/Home';
-import Home2 from '../components/home/Home';
+import ActionContainer from './ActionContainer/ActionContainer';
+import SettingContainer from './SettingContainer/SettingContainer';
 
 const TabNavigator = createBottomTabNavigator({
   Home: Home,
-  Home2: Home2,
+  Action: ActionContainer,
+  Setting: SettingContainer,
 });
 
 const TAB = createAppContainer(TabNavigator);
 
 const RootStack = createStackNavigator(
   {
-    // Init: {
-    //   screen: WelcomeScreen,
-    // },
+
     Login: {
       screen: LoginContainer,
+    },
+
+    ActionContainer: {
+      screen: ActionContainer,
+    },
+
+    Setting: {
+      screen: SettingContainer,
     },
 
     MyModal: {

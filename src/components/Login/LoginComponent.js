@@ -8,12 +8,12 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import {Sizes} from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
 import {colors} from '../../res/values/styles/color';
-
 export default class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -95,16 +95,46 @@ export default class LoginComponent extends React.Component {
                   paddingHorizontal: Sizes.s25,
                 }}
                 placeholder="Passcode"
+                value={this.state.passCode}
+                onChangeText={(text) => this.setState({passCode: text})}
               />
             </View>
+
             <View
               style={{
                 width: '80%',
                 alignSelf: 'center',
-                marginTop: Sizes.s5,
+                marginTop: Sizes.s15,
+                marginLeft: Sizes.s25,
               }}>
-             <Text style = {{color :'red'}}>Passcode is not empty!</Text>
+              <Text style={{color: colors.red, fontWeight: 'bold'}}>
+                {this.state.passCode === '' ? 'Passcode is not empty!' : ''}
+              </Text>
             </View>
+
+            <View
+              style={{
+                alignSelf: 'center',
+                width: '70%',
+                paddingTop: Sizes.s40,
+              }}>
+              <TouchableOpacity
+                style={{
+                  width: '100%',
+                  borderRadius: Sizes.s25,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'aqua',
+                  padding: Sizes.s15,
+                }}>
+                <Text>Login</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={{alignItems: 'center', marginTop: Sizes.s5}}>
+              <Text style={{fontWeight: 'bold'}}>Register Device</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </SafeAreaView>

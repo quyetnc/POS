@@ -1,10 +1,10 @@
 import { all } from 'redux-saga/effects';
-
-import { watchLogin } from './loginSagas';
+ 
+import {watchAllProperty} from './Login/getAllPropertySaga'
 
 
 export default function* rootSaga() {
     yield all([
-        watchLogin(),
+        watchAllProperty(),
     ]);
 }

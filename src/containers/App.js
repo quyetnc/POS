@@ -4,7 +4,7 @@ import {createAppContainer} from 'react-navigation'; // 1.0.0-beta.27
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
  
-import LoginContainer from './LoginContainer'
+import LoginContainer from './Login/LoginContainer'
 import WelcomeScreen from '../components/welcomeScreen/WelcomeScreen';
 
 import Home from '../components/home/Home';

@@ -26,7 +26,6 @@ export default class LoginComponent extends React.Component {
       valueOutlet: [],
       passCode: '',
       visibleRegister: false,
-      opacityView: false,
     };
   }
   render() {
@@ -141,8 +140,3 @@ export default class LoginComponent extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

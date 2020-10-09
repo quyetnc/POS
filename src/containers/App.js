@@ -1,29 +1,35 @@
 import React from 'react';
-import {Button, Image, View, Text} from 'react-native';
-import {createAppContainer} from 'react-navigation'; // 1.0.0-beta.27
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
- 
-import LoginContainer from './Login/LoginContainer'
-import WelcomeScreen from '../components/welcomeScreen/WelcomeScreen';
+import { Button, Image, View, Text } from 'react-native';
+import { createAppContainer } from 'react-navigation'; // 1.0.0-beta.27
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import LoginContainer from './LoginContainer'
 import Home from '../components/home/Home';
-import Home2 from '../components/home/Home';
+import ActionContainer from './ActionContainer/ActionContainer';
+import SettingContainer from './SettingContainer/SettingContainer';
 
 const TabNavigator = createBottomTabNavigator({
   Home: Home,
-  Home2: Home2,
+  Action: ActionContainer,
+  Setting: SettingContainer,
 });
 
 const TAB = createAppContainer(TabNavigator);
 
 const RootStack = createStackNavigator(
   {
-    // Init: {
-    //   screen: WelcomeScreen,
-    // },
+
     Login: {
       screen: LoginContainer,
+    },
+
+    ActionContainer: {
+      screen: ActionContainer,
+    },
+
+    Setting: {
+      screen: SettingContainer,
     },
 
     MyModal: {

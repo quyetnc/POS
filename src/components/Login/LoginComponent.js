@@ -125,7 +125,8 @@ export default class LoginComponent extends React.Component {
                   alignItems: 'center',
                   backgroundColor: 'aqua',
                   padding: Sizes.s15,
-                }}>
+                }}
+                onPress={() => this.props.navigation.navigate('Home')}>
                 <Text>Login</Text>
               </TouchableOpacity>
             </View>
@@ -140,3 +141,9 @@ export default class LoginComponent extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

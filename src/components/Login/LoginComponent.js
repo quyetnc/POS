@@ -31,6 +31,39 @@ export default class LoginComponent extends React.Component {
       opacityView : false
     };
   }
+  componentDidMount (){
+    this.props.onGetAllPropertyAction()
+  }
+  async componentDidUpdate (prevProps){
+    if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
+      await this.getAllProperty();
+    }
+  }
+
+
+  getAllProperty = () => {
+    let arrProperty = [];
+    let arrRoom = [];
+    let indexTMP = 0;
+     
+    this.props.allPropertyReducers.map((item) => {
+      arrProperty.push({
+        _id: item.CODE,
+        label: item.NAME,
+      });
+   
+      // let letArrRoom = [];
+      // item.room.map((item2) => {
+      //   letArrRoom.push({
+      //     value: item2._id,
+      //     label: item2.roomName + '-' + item2.location,
+      //   });
+      // });
+      // arrRoom.push(letArrRoom);
+    });
+ 
+    this.setState({valueProperty: arrProperty});
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -80,6 +113,7 @@ export default class LoginComponent extends React.Component {
                 this.setState({opacityView: !this.state.opacityView})
               }
             />
+            {/* <Button title= "check" onPress = {()=>console.log(this.state.valueProperty)}/> */}
             <Picker
               style={{
                 width: '80%',
@@ -145,7 +179,7 @@ export default class LoginComponent extends React.Component {
                   backgroundColor: 'aqua',
                   padding: Sizes.s15,
                 }}
-                onPress={() => this.props.navigation.navigate('Home')}>
+                onPress={() => this.props.navigation.navigate("Home")}>
                 <Text>Login</Text>
               </TouchableOpacity>
             </View>

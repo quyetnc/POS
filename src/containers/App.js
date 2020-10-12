@@ -9,15 +9,32 @@ import HomeContainer from './Home/HomeContainer';
 import ActionContainer from './Action/ActionContainer';
 import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import OrderItemContainer from './OrderItem/OrderItemContainer'
+
+
+const HomeStack = createStackNavigator(
+  {
+    HomeMain: {
+      screen: HomeContainer,
+    },
+    OrderItem: {
+      screen: OrderItemContainer
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+)
 
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
-    screen: HomeContainer,
+    screen: HomeStack,
     navigationOptions: {
       tabBarLabel: "Trang chủ",
       tabBarIcon: () => (
-        <Icon name='home' size={20} color="green" />
+        <Icon name='home' size={20} color="#4dbd73" />
       ),
     },
   },
@@ -26,7 +43,7 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: "Mở rộng",
       tabBarIcon: () => (
-        <Icon name='ellipsis-h' size={20} color='green' />
+        <Icon name='ellipsis-h' size={20} color='#4dbd73' />
       ),
     },
   },
@@ -35,13 +52,15 @@ const TabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Hệ thống',
       tabBarIcon: () => (
-        <Icon name='cog' size={20} color='green' />
+        <Icon name='cog' size={20} color='#4dbd73' />
       )
     }
   },
+
 });
 
 const HomeTab = createAppContainer(TabNavigator);
+
 
 const RootStack = createStackNavigator(
   {

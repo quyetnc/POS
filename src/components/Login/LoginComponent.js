@@ -31,9 +31,7 @@ export default class LoginComponent extends React.Component {
       valueOutlet: [],
       passCode: '',
       visibleRegister: false,
-      opacityView: false,
-      propertyShow: false,
-      outletShow: false,
+      opacityView: false
     };
   }
   componentDidMount() {
@@ -101,6 +99,15 @@ export default class LoginComponent extends React.Component {
         code: item.OUTLET_CODE,
         label: item.NAME,
       });
+
+      // let letArrRoom = [];
+      // item.room.map((item2) => {
+      //   letArrRoom.push({
+      //     value: item2._id,
+      //     label: item2.roomName + '-' + item2.location,
+      //   });
+      // });
+      // arrRoom.push(letArrRoom);
     });
 
     this.setState({ valueOutlet: arrOutlet }, () =>
@@ -110,7 +117,11 @@ export default class LoginComponent extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        {this.state.opacityView === true ? <ViewOpaticy /> : <View />}
+        {this.state.opacityView === true ? (
+          <ViewOpaticy />
+        ) : (
+            <View />
+          )}
 
         <RegisterDeviceModal
           visibleRegister={this.state.visibleRegister}

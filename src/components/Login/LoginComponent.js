@@ -59,8 +59,8 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({valueProperty: arrProperty}, () => {
-      this.setState({propertySelection: arrProperty[0]});
+    this.setState({ valueProperty: arrProperty}, () => {
+      this.setState({ propertySelection: arrProperty[0] });
       this.getOutlet(this.state.valueProperty[0].value);
     });
   };

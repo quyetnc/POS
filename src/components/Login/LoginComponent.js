@@ -35,9 +35,30 @@ export default class LoginComponent extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.onGetAllPropertyAction()
+    console.log('Hello cac ban !!!')
+    this._isMounted = true;
+    this.getMacAddressDevice();
+    this.props.onGetAllPropertyAction();
   }
-  async componentDidUpdate(prevProps) {
+
+  getMacAddressDevice = async () => {
+    let mac = await DeviceInfo.getMacAddress();
+    if (this._isMounted) {
+      this.setState(
+        {
+          deviceBodyCheck: {
+            ...this.state.deviceBodyCheck,
+            NAME: mac,
+          },
+        },
+        () => {
+          // console.log('deviceBodyCheck: ', this.state.deviceBodyCheck);
+        },
+      );
+    }
+  };
+
+  componentDidUpdate(prevProps) {
     if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
       this.getAllProperty();
     }
@@ -59,7 +80,7 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({ valueProperty: arrProperty}, () => {
+    this.setState({ valueProperty: arrProperty }, () => {
       this.setState({ propertySelection: arrProperty[0] });
       this.getOutlet(this.state.valueProperty[0].value);
     });
@@ -89,7 +110,9 @@ export default class LoginComponent extends React.Component {
       // arrRoom.push(letArrRoom);
     });
 
-    this.setState({ valueProperty: arrProperty });
+    this.setState({ valueOutlet: arrOutlet }, () =>
+      this.setState({ outletSelection: arrOutlet[0] }),
+    );
   };
   render() {
     return (
@@ -104,13 +127,15 @@ export default class LoginComponent extends React.Component {
           visibleRegister={this.state.visibleRegister}
           valueProperty={this.state.valueProperty}
           valueOutlet={this.state.valueOutlet}
-          setPropertySelection={(text) =>
-            this.setState({ propertySelection: text })
+          setPropertySelection={(item) =>
+            this.setState({ propertySelection: item })
           }
-          setOutletSelection={(text) => this.setState({ outletSelection: text })}
+          setOutletSelection={(item) => this.setState({ outletSelection: item })}
           propertySelection={this.state.propertySelection}
           outletSelection={this.state.outletSelection}
-          offModal={() => this.setState({ visibleRegister: false, opacityView: false })}
+          offModal={() =>
+            this.setState({ visibleRegister: false, opacityView: false })
+          }
         />
         <ScrollView
           contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
@@ -131,13 +156,13 @@ export default class LoginComponent extends React.Component {
               }}
               data={this.state.valueProperty} //lable
               noDataMessage="Dữ Liệu Trống"
-              placeholder="Chọn giá trị"
-              title="Chọn Platform"
-              value={this.state.propertySelection.label}
-              position="flex-end" //flex-end, flex-start, center
-              onChangeItem={(item) => this.setState({ itemValue: item })}
-              setOpacity={() =>
-                this.setState({ opacityView: !this.state.opacityView })
+              placeholder="Chọn Property"
+              title="Chọn Property"
+              value={this.state.propertySelection}
+              onChangeItem={(item) =>
+                this.setState({ propertySelection: item }, () =>
+                  this.getOutlet(item.value),
+                )
               }
             />
 
@@ -150,13 +175,18 @@ export default class LoginComponent extends React.Component {
               }}
               data={this.state.valueOutlet} //lable
               noDataMessage="Dữ Liệu Trống"
-              placeholder="Chọn giá trị"
-              title="Chọn Platform"
-              value={this.state.propertySelection.label}
-              position="flex-end" //flex-end, flex-start, center
-              onChangeItem={(item) => this.setState({ itemValue: item })}
-              setOpacity={() =>
-                this.setState({ opacityView: !this.state.opacityView })
+              placeholder="Chọn Outlet"
+              title="Chọn Outlet"
+              value={this.state.outletSelection}
+              onChangeItem={(item) => this.setState({ outletSelection: item })}
+            />
+            <Button
+              title="check"
+              onPress={() =>
+                console.log(
+                  this.state.outletSelection,
+                  this.state.propertySelection,
+                )
               }
             />
 
@@ -214,7 +244,9 @@ export default class LoginComponent extends React.Component {
 
             <TouchableOpacity
               style={{ alignItems: 'center', marginTop: Sizes.s5 }}
-              onPress={() => { this.setState({ opacityView: true, visibleRegister: true }) }}>
+              onPress={() => {
+                this.setState({ opacityView: true, visibleRegister: true });
+              }}>
               <Text style={{ fontWeight: 'bold' }}>Register Device</Text>
             </TouchableOpacity>
           </View>

@@ -19,10 +19,13 @@ export default class RegisterDeviceModal extends Component {
 
   render() {
     return (
-      <Modal visible={this.props.visibleRegister} transparent={true} animationType="fade">
+      <Modal
+        visible={this.props.visibleRegister}
+        transparent={true}
+        animationType="fade">
         <TouchableWithoutFeedback
           onPress={() => {
-          this.props.offModal()
+            this.props.offModal();
           }}>
           <View
             style={{
@@ -32,7 +35,12 @@ export default class RegisterDeviceModal extends Component {
             <TouchableWithoutFeedback>
               <View style={[styles.modal]}>
                 <Text style={styles.title}>Register Device</Text>
-                <View style={{flex: 1, backgroundColor: 'white', justifyContent:'center'}}>
+                <View
+                  style={{
+                    flex: 1,
+                    backgroundColor: 'white',
+                    justifyContent: 'center',
+                  }}>
                   <Picker
                     style={{
                       width: '80%',
@@ -42,16 +50,12 @@ export default class RegisterDeviceModal extends Component {
                     }}
                     data={this.props.valueProperty} //lable
                     noDataMessage="Dữ Liệu Trống"
-                    placeholder="Chọn giá trị"
-                    title="Chọn Platform"
-                    value={this.props.propertySelection.label}
-                    position="flex-start" //flex-end, flex-start, center
+                    placeholder="Chọn Property"
+                    title="Chọn Property"
+                    value={this.props.propertySelection}
                     onChangeItem={(item) =>
                       this.props.setPropertySelection(item)
                     }
-                    //   setOpacity={() =>
-                    //     this.setState({opacityView: !this.state.opacityView})
-                    //   }
                   />
                   <Picker
                     style={{
@@ -62,18 +66,18 @@ export default class RegisterDeviceModal extends Component {
                     }}
                     data={this.props.valueOutlet} //lable
                     noDataMessage="Dữ Liệu Trống"
-                    placeholder="Chọn giá trị"
-                    title="Chọn Platform"
-                    value={this.props.outletSelection.label}
-                    position="flex-end" //flex-end, flex-start, center
+                    placeholder="Chọn Outlet"
+                    title="Chọn Outlet"
+                    value={this.props.outletSelection}
                     onChangeItem={(item) => this.props.setOutletSelection(item)}
-                    //   setOpacity={() =>
-                    //     this.setState({opacityView: !this.state.opacityView})
-                    //   }
                   />
                 </View>
                 <View
-                  style={{flexDirection: 'row', justifyContent: 'flex-end', marginBottom :Sizes.s25}}>
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    marginBottom: Sizes.s25,
+                  }}>
                   <TouchableOpacity
                     style={{
                       padding: Sizes.s20,

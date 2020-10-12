@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux';
-import allPropertyReducers from './Login/AllPropertyReducers'
+import {combineReducers} from 'redux';
+import allPropertyReducers from './Login/AllPropertyReducers';
+import outletReducers from './Login/OutletReducers';
 const allReducers = combineReducers({
-    allPropertyReducers,
+  allPropertyReducers,
+  outletReducers,
 });
 
 export default allReducers;

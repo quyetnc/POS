@@ -25,29 +25,33 @@ export default class Picker extends Component {
       selectedItem: null,
     };
   }
+  componentDidMount() {
+    if (this.props.value != null) {
+      this.setState({selectedItem: this.props.value});
+    }
+  }
+  componentDidUpdate() {}
   render() {
     const {isShowModal, selectedItem} = this.state;
     const {
-      data,
-      title,
-      style,
-      modalStyle,
+      data, // array truyền vào [{id,123, label: '', value: ''}]
+      title, //title của modal
+      style, //style của touch picker
+      modalStyle, //style của modal
       placeholder,
       onChangeItem,
-      noDataMessage,
-      value,
-      position,
+      noDataMessage, // thông báo khi data = null
+      value, //giá trị picker (state)
+      position, //vị trí của modal (flex-start, flex-end, center)
+      height, //chiều cao của moda (theo % màn hình)
     } = this.props;
     //render item for flatList/////////////
     const renderItem = ({item, index}) => {
       return (
         <TouchableOpacity
-          key={item._id}
           style={styles.item}
           onPress={() => {
-            this.setState({selectedItem: item}, () =>
-              showModalAndOpacityView(),
-            );
+            this.setState({selectedItem: item, isShowModal: false});
             onChangeItem(item);
           }}>
           <Text
@@ -70,11 +74,6 @@ export default class Picker extends Component {
         </TouchableOpacity>
       );
     };
-
-    showModalAndOpacityView = () => {
-      this.props.setOpacity();
-      this.setState({isShowModal: !isShowModal});
-    };
     ///////////////////////////////////////////////////////////////
     return (
       <View>
@@ -83,7 +82,7 @@ export default class Picker extends Component {
           onPress={() => {
             arrayIsEmpty(data)
               ? Alert.alert('Thông báo', noDataMessage) //báo lỗi khi data truyền vào = null hoặc []
-              : showModalAndOpacityView();
+              : this.setState({isShowModal: !isShowModal});
           }}>
           <View
             style={{
@@ -101,9 +100,19 @@ export default class Picker extends Component {
             <Icon name="angle-down" size={Sizes.s25} />
           </View>
         </TouchableOpacity>
-        
+        {/* ///////////////////////////////// */}
+        <Modal visible={isShowModal} transparent={true} animationType="fade">
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: '#00000036',
+            }}
+          />
+        </Modal>
+        {/* ///////////////////////////////////// */}
         <Modal visible={isShowModal} transparent={true} animationType="slide">
-          <TouchableWithoutFeedback onPress={() => showModalAndOpacityView()}>
+          <TouchableWithoutFeedback
+            onPress={() => this.setState({isShowModal: !isShowModal})}>
             <View
               style={{
                 flex: 1,
@@ -111,25 +120,16 @@ export default class Picker extends Component {
               }}>
               <TouchableWithoutFeedback>
                 {/*//truyền modalStyle tùy biến cho modal */}
-                <View
-                  style={[
-                    styles.modal,
-                    modalStyle,
-                    {
-                      borderTopRightRadius: Sizes.s40,
-                      borderTopLeftRadius: Sizes.s40,
-                    },
-                  ]}>
-                  {/* //title = null sẽ không hiển thị lên modal */}
+                <View style={[styles.modal, modalStyle, {height: height}]}>
+                  {/* //title = null sẽ không hiển thị trên modal */}
                   {!stringIsEmpty(title) ? (
                     <Text style={styles.title}>{title}</Text>
                   ) : null}
                   <FlatList
-                    style={{flex: 0.4}}
+                    style={{flex: 1}}
                     data={data}
-                    key={(index) => index}
                     showsVerticalScrollIndicator={false}
-                    keyExtractor={(index) => index}
+                    keyExtractor={(item, index) => item.id}
                     renderItem={(item, index) => renderItem(item, index)}
                   />
                 </View>
@@ -141,7 +141,12 @@ export default class Picker extends Component {
     );
   }
 }
-
+Picker.defaultProps = {
+  onChangeItem: () => {},
+  noDataMessage: 'Không có dữ liệu',
+  position: 'flex-end',
+  height: '40%',
+};
 const styles = StyleSheet.create({
   title: {
     fontSize: Sizes.s40,
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
   pickerStyle: {
     borderColor: '#D7DDE3',
     borderWidth: 1,
-    paddingVertical :Sizes.s20,  
+    height: Sizes.s90,
     marginTop: Sizes.s10,
     marginBottom: Sizes.s10,
     borderRadius: Sizes.s7,
@@ -172,7 +177,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Sizes.s10,
   },
   modal: {
-    height: '40%',
     borderTopRightRadius: Sizes.s40,
     borderTopLeftRadius: Sizes.s40,
     justifyContent: 'center',

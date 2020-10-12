@@ -9,11 +9,28 @@ import HomeContainer from './Home/HomeContainer';
 import ActionContainer from './Action/ActionContainer';
 import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import OrderItemContainer from './OrderItem/OrderItemContainer'
+
+
+const HomeStack = createStackNavigator(
+  {
+    HomeMain: {
+      screen: HomeContainer,
+    },
+    OrderItem: {
+      screen: OrderItemContainer
+    }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+)
 
 
 const TabNavigator = createBottomTabNavigator({
   Home: {
-    screen: HomeContainer,
+    screen: HomeStack,
     navigationOptions: {
       tabBarLabel: "Trang chủ",
       tabBarIcon: () => (
@@ -39,9 +56,11 @@ const TabNavigator = createBottomTabNavigator({
       )
     }
   },
+
 });
 
 const HomeTab = createAppContainer(TabNavigator);
+
 
 const RootStack = createStackNavigator(
   {

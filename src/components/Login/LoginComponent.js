@@ -10,10 +10,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
-import {colors} from '../../res/values/styles/color';
+import { colors } from '../../res/values/styles/color';
 import RegisterDeviceModal from './RegisterDeviceModal';
 import ViewOpaticy from '../Custom/ViewOpaticy'
 export default class LoginComponent extends React.Component {
@@ -28,13 +28,13 @@ export default class LoginComponent extends React.Component {
       valueOutlet: [],
       passCode: '',
       visibleRegister: false,
-      opacityView : false
+      opacityView: false
     };
   }
-  componentDidMount (){
+  componentDidMount() {
     this.props.onGetAllPropertyAction()
   }
-  async componentDidUpdate (prevProps){
+  async componentDidUpdate(prevProps) {
     if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
       await this.getAllProperty();
     }
@@ -45,13 +45,13 @@ export default class LoginComponent extends React.Component {
     let arrProperty = [];
     let arrRoom = [];
     let indexTMP = 0;
-     
+
     this.props.allPropertyReducers.map((item) => {
       arrProperty.push({
         _id: item.CODE,
         label: item.NAME,
       });
-   
+
       // let letArrRoom = [];
       // item.room.map((item2) => {
       //   letArrRoom.push({
@@ -61,40 +61,40 @@ export default class LoginComponent extends React.Component {
       // });
       // arrRoom.push(letArrRoom);
     });
- 
-    this.setState({valueProperty: arrProperty});
+
+    this.setState({ valueProperty: arrProperty });
   };
   render() {
     return (
       <SafeAreaView style={styles.container}>
         {this.state.opacityView === true ? (
-         <ViewOpaticy/>
+          <ViewOpaticy />
         ) : (
-          <View />
-        )}
+            <View />
+          )}
 
         <RegisterDeviceModal
-          visibleRegister = {this.state.visibleRegister}
+          visibleRegister={this.state.visibleRegister}
           valueProperty={this.state.valueProperty}
           valueOutlet={this.state.valueOutlet}
           setPropertySelection={(text) =>
-            this.setState({propertySelection: text})
+            this.setState({ propertySelection: text })
           }
-          setOutletSelection={(text) => this.setState({outletSelection: text})}
+          setOutletSelection={(text) => this.setState({ outletSelection: text })}
           propertySelection={this.state.propertySelection}
           outletSelection={this.state.outletSelection}
-          offModal = {() => this.setState({visibleRegister : false, opacityView :false})}
+          offModal={() => this.setState({ visibleRegister: false, opacityView: false })}
         />
         <ScrollView
-          contentContainerStyle={[{justifyContent: 'center', flexGrow: 1}]}>
-          <View style={{alignItems: 'center'}}>
+          contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
+          <View style={{ alignItems: 'center' }}>
             <Image
               resizeMode="contain"
               source={images.ic_fpt_is}
-              style={{width: '30%'}}
+              style={{ width: '30%' }}
             />
           </View>
-          <View style={{marginTop: Sizes.s40}}>
+          <View style={{ marginTop: Sizes.s40 }}>
             <Picker
               style={{
                 width: '80%',
@@ -108,9 +108,9 @@ export default class LoginComponent extends React.Component {
               title="Chọn Platform"
               value={this.state.propertySelection.label}
               position="flex-end" //flex-end, flex-start, center
-              onChangeItem={(item) => this.setState({itemValue: item})}
+              onChangeItem={(item) => this.setState({ itemValue: item })}
               setOpacity={() =>
-                this.setState({opacityView: !this.state.opacityView})
+                this.setState({ opacityView: !this.state.opacityView })
               }
             />
             {/* <Button title= "check" onPress = {()=>console.log(this.state.valueProperty)}/> */}
@@ -127,9 +127,9 @@ export default class LoginComponent extends React.Component {
               title="Chọn Platform"
               value={this.state.propertySelection.label}
               position="flex-end" //flex-end, flex-start, center
-              onChangeItem={(item) => this.setState({itemValue: item})}
+              onChangeItem={(item) => this.setState({ itemValue: item })}
               setOpacity={() =>
-                this.setState({opacityView: !this.state.opacityView})
+                this.setState({ opacityView: !this.state.opacityView })
               }
             />
             <View
@@ -148,7 +148,7 @@ export default class LoginComponent extends React.Component {
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
-                onChangeText={(text) => this.setState({passCode: text})}
+                onChangeText={(text) => this.setState({ passCode: text })}
               />
             </View>
 
@@ -159,7 +159,7 @@ export default class LoginComponent extends React.Component {
                 marginTop: Sizes.s15,
                 marginLeft: Sizes.s25,
               }}>
-              <Text style={{color: colors.red, fontWeight: 'bold'}}>
+              <Text style={{ color: colors.red, fontWeight: 'bold' }}>
                 {this.state.passCode === '' ? 'Passcode is not empty!' : ''}
               </Text>
             </View>
@@ -185,9 +185,9 @@ export default class LoginComponent extends React.Component {
             </View>
 
             <TouchableOpacity
-              style={{alignItems: 'center', marginTop: Sizes.s5}}
-              onPress = {()=>{this.setState({opacityView:true, visibleRegister : true})}}>
-              <Text style={{fontWeight: 'bold'}}>Register Device</Text>
+              style={{ alignItems: 'center', marginTop: Sizes.s5 }}
+              onPress={() => { this.setState({ opacityView: true, visibleRegister: true }) }}>
+              <Text style={{ fontWeight: 'bold' }}>Register Device</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

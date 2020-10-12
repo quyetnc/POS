@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import Table from '../Table/TableComponent';
-
+import Table from './TableComponent';
+import ViewOpaticy from '../Custom/ViewOpaticy'
+import TabLocation from './TabLocation'
 export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
@@ -14,20 +14,25 @@ export default class HomeComponent extends Component {
         { id: 3, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
         { id: 4, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
         { id: 5, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
-        { id: 6, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' }
+        { id: 6, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
+        { id: 7, name: '', user: '', price: '' },
+        { id: 7, name: '', user: '', price: '' },
       ],
+      opacityView: false,
+      visibleInfoGuest: false,
     };
-
   }
 
   render() {
     const { data } = this.state;
     const ItemTable = data.map((item, index) => {
       return (<Table
+        navigation={this.props.navigation}
         key={index}
         name={item.name}
         user={item.user}
         price={item.price}
+        offModal={() => this.setState({ visibleInfoGuest: false, opacityView: false })}
       />)
 
     })
@@ -37,11 +42,19 @@ export default class HomeComponent extends Component {
         <SafeAreaView style={styles.header}>
           <Text style={styles.titile}>Trang chủ</Text>
         </SafeAreaView>
-        <ScrollView>
-          <View style={styles.content}>
-            {ItemTable}
-          </View>
-        </ScrollView>
+        <View style={{ flexDirection: 'column', }}>
+          <TabLocation />
+          <ScrollView>
+            <View style={styles.content}>
+              {this.state.opacityView === true ? (
+                <ViewOpaticy />
+              ) :
+                null
+              }
+              {ItemTable}
+            </View>
+          </ScrollView>
+        </View>
       </View>
     );
   }
@@ -66,9 +79,10 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    margin: 10,
-    padding: 10,
+    margin: Sizes.s10,
+    padding: Sizes.s10,
     flexWrap: 'wrap'
   },
+
 
 });

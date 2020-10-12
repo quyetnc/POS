@@ -10,10 +10,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
-import {colors} from '../../res/values/styles/color';
+import { colors } from '../../res/values/styles/color';
 import RegisterDeviceModal from './RegisterDeviceModal';
 import ViewOpaticy from '../Custom/ViewOpaticy';
 import DeviceInfo from 'react-native-device-info';
@@ -37,6 +37,7 @@ export default class LoginComponent extends React.Component {
     };
   }
   componentDidMount() {
+    console.log('Hello cac ban !!!')
     this._isMounted = true;
     this.getMacAddressDevice();
     this.props.onGetAllPropertyAction();
@@ -59,7 +60,7 @@ export default class LoginComponent extends React.Component {
     }
   };
 
-   componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
       this.getAllProperty();
     }
@@ -81,8 +82,8 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({valueProperty: arrProperty}, () => {
-      this.setState({propertySelection: arrProperty[0]});
+    this.setState({ valueProperty: arrProperty }, () => {
+      this.setState({ propertySelection: arrProperty[0] });
       this.getOutlet(this.state.valueProperty[0].value);
     });
   };
@@ -102,8 +103,8 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({valueOutlet: arrOutlet}, () =>
-      this.setState({outletSelection: arrOutlet[0]}),
+    this.setState({ valueOutlet: arrOutlet }, () =>
+      this.setState({ outletSelection: arrOutlet[0] }),
     );
   };
   render() {
@@ -116,25 +117,25 @@ export default class LoginComponent extends React.Component {
           valueProperty={this.state.valueProperty}
           valueOutlet={this.state.valueOutlet}
           setPropertySelection={(item) =>
-            this.setState({propertySelection: item})
+            this.setState({ propertySelection: item })
           }
-          setOutletSelection={(item) => this.setState({outletSelection: item})}
+          setOutletSelection={(item) => this.setState({ outletSelection: item })}
           propertySelection={this.state.propertySelection}
           outletSelection={this.state.outletSelection}
           offModal={() =>
-            this.setState({visibleRegister: false, opacityView: false})
+            this.setState({ visibleRegister: false, opacityView: false })
           }
         />
         <ScrollView
-          contentContainerStyle={[{justifyContent: 'center', flexGrow: 1}]}>
-          <View style={{alignItems: 'center'}}>
+          contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
+          <View style={{ alignItems: 'center' }}>
             <Image
               resizeMode="contain"
               source={images.ic_fpt_is}
-              style={{width: '30%'}}
+              style={{ width: '30%' }}
             />
           </View>
-          <View style={{marginTop: Sizes.s40}}>
+          <View style={{ marginTop: Sizes.s40 }}>
             <Picker
               style={{
                 width: '80%',
@@ -148,7 +149,7 @@ export default class LoginComponent extends React.Component {
               title="Chọn Property"
               value={this.state.propertySelection}
               onChangeItem={(item) =>
-                this.setState({propertySelection: item}, () =>
+                this.setState({ propertySelection: item }, () =>
                   this.getOutlet(item.value),
                 )
               }
@@ -166,7 +167,7 @@ export default class LoginComponent extends React.Component {
               placeholder="Chọn Outlet"
               title="Chọn Outlet"
               value={this.state.outletSelection}
-              onChangeItem={(item) => this.setState({outletSelection: item})}
+              onChangeItem={(item) => this.setState({ outletSelection: item })}
             />
             <Button
               title="check"
@@ -194,7 +195,7 @@ export default class LoginComponent extends React.Component {
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
-                onChangeText={(text) => this.setState({passCode: text})}
+                onChangeText={(text) => this.setState({ passCode: text })}
               />
             </View>
 
@@ -205,7 +206,7 @@ export default class LoginComponent extends React.Component {
                 marginTop: Sizes.s15,
                 marginLeft: Sizes.s25,
               }}>
-              <Text style={{color: colors.red, fontWeight: 'bold'}}>
+              <Text style={{ color: colors.red, fontWeight: 'bold' }}>
                 {this.state.passCode === '' ? 'Passcode is not empty!' : ''}
               </Text>
             </View>
@@ -231,11 +232,11 @@ export default class LoginComponent extends React.Component {
             </View>
 
             <TouchableOpacity
-              style={{alignItems: 'center', marginTop: Sizes.s5}}
+              style={{ alignItems: 'center', marginTop: Sizes.s5 }}
               onPress={() => {
-                this.setState({opacityView: true, visibleRegister: true});
+                this.setState({ opacityView: true, visibleRegister: true });
               }}>
-              <Text style={{fontWeight: 'bold'}}>Register Device</Text>
+              <Text style={{ fontWeight: 'bold' }}>Register Device</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

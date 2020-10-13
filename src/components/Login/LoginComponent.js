@@ -35,7 +35,7 @@ export default class LoginComponent extends React.Component {
     };
   }
   componentDidMount() {
-    console.log('Hello cac ban !!!')
+   
     this._isMounted = true;
     this.getMacAddressDevice();
     this.props.onGetAllPropertyAction();

@@ -1,8 +1,8 @@
-import {all} from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 
-import {watchAllProperty} from './Login/getAllPropertySaga';
-import {watchGetOutlet} from './Login/getOutletSaga';
-
+import { watchAllProperty } from './Login/getAllPropertySaga';
+import { watchGetOutlet } from './Login/getOutletSaga';
+import { watchGetTable } from './Table/getTableSaga';
 export default function* rootSaga() {
-  yield all([watchAllProperty(), watchGetOutlet()]);
+  yield all([watchAllProperty(), watchGetOutlet(), watchGetTable()]);
 }

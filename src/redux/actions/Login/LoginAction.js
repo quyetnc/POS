@@ -5,7 +5,7 @@ export const POST_LOGOUT = 'POST_LOGOUT';
 
 export const loginAction = (user, password) => {
   return {
-    type: POST_LOGIN,
+    type: POST_LOGIN, 
     data: {user, password},
   };
 };

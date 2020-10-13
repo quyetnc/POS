@@ -79,6 +79,7 @@ export default class RegisterDeviceModal extends Component {
                     marginBottom: Sizes.s25,
                   }}>
                   <TouchableOpacity
+                    onPress={() => this.props.offModal()}
                     style={{
                       padding: Sizes.s20,
                       backgroundColor: 'orange',

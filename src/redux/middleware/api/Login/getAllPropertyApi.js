@@ -16,5 +16,5 @@ export async function get_AllProperty() {
           requestOptions,
        )
     ).json();
- 
+
  }

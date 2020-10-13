@@ -13,6 +13,7 @@ class TabLocation extends Component {
         }
 
     }
+
     renderTabLayout() {
         const data = [
             { id: 1, item: 'A' },
@@ -39,7 +40,7 @@ class TabLocation extends Component {
     render() {
 
         return (
-            <View style={styles.container}>
+            <View style={styles.container} >
                 <View style={styles.TabCustom}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, }}>
                         <View style={{ flexDirection: 'row' }}>{this.renderTabLayout()}</View>

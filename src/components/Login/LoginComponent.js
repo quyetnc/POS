@@ -63,11 +63,7 @@ export default class LoginComponent extends React.Component {
     }
   };
 
-<<<<<<< HEAD
-   componentDidUpdate(prevProps) {
-=======
   componentDidUpdate(prevProps) {
->>>>>>> 828f05813c5694a9dd9e3f3723423a13d6244d04
     if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
       this.getAllProperty();
     }
@@ -156,10 +152,7 @@ export default class LoginComponent extends React.Component {
           offModal={() =>
             this.setState({visibleRegister: false, opacityView: false})
           }
-<<<<<<< HEAD
-=======
           postRegisterDevicee={() => this.postRegisterDevice()}
->>>>>>> 828f05813c5694a9dd9e3f3723423a13d6244d04
         />
         <ScrollView
           contentContainerStyle={[{justifyContent: 'center', flexGrow: 1}]}>

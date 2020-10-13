@@ -97,6 +97,10 @@ export default class RegisterDeviceModal extends Component {
                       marginRight: '10%',
                       width: '15%',
                       alignItems: 'center',
+                    }}
+                    onPress={() => {
+                      this.props.postRegisterDevicee();
+                      this.props.offModal();
                     }}>
                     <Text style={{color: 'white'}}>OK</Text>
                   </TouchableOpacity>

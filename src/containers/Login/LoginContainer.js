@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LoginComponent from '../../components/Login/LoginComponent';
-import {getAllPropertyAction,getOutletAction} from '../../redux/actions/Login/LoginAction';
+import {
+  getAllPropertyAction,
+  getOutletAction,
+} from '../../redux/actions/Login/LoginAction';
+import {postRegisterDeviceAction} from '../../redux/actions/Login/RegisterDeviceAction';
 
 export class LoginContainer extends Component {
   render() {
@@ -10,10 +14,10 @@ export class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state.outletReducers);
   return {
     allPropertyReducers: state.allPropertyReducers,
     outletReducers: state.outletReducers,
+    statusRegisterDevice: state.registerDeviceReducers,
   };
 };
 
@@ -24,6 +28,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onGetOutletAction: (code) => {
       dispatch(getOutletAction(code));
+    },
+    onPostRegisterDeviceAction: (info) => {
+      dispatch(postRegisterDeviceAction(info));
     },
   };
 };

@@ -10,10 +10,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { Sizes } from '@dungdang/react-native-basic';
+import {Sizes} from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
-import { colors } from '../../res/values/styles/color';
+import {colors} from '../../res/values/styles/color';
 import RegisterDeviceModal from './RegisterDeviceModal';
 import ViewOpaticy from '../Custom/ViewOpaticy';
 import DeviceInfo from 'react-native-device-info';
@@ -36,10 +36,14 @@ export default class LoginComponent extends React.Component {
       outletShow: false,
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
     this.getMacAddressDevice();
-    this.props.onGetAllPropertyAction();
+    await this.props.onGetAllPropertyAction();
+    // this.setState({
+    //   propertySelection: valueProperty[0],
+    //   outletSelection: valueOutlet[0],
+    // });
   }
 
   getMacAddressDevice = async () => {
@@ -59,7 +63,11 @@ export default class LoginComponent extends React.Component {
     }
   };
 
+<<<<<<< HEAD
    componentDidUpdate(prevProps) {
+=======
+  componentDidUpdate(prevProps) {
+>>>>>>> 828f05813c5694a9dd9e3f3723423a13d6244d04
     if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
       this.getAllProperty();
     }
@@ -67,13 +75,19 @@ export default class LoginComponent extends React.Component {
     if (prevProps.outletReducers !== this.props.outletReducers) {
       this.setOutlet();
     }
+
+    if (prevProps.statusRegisterDevice !== this.props.statusRegisterDevice) {
+      this.props.statusRegisterDevice === true
+        ? alert('Register Device Success!')
+        : {};
+    }
   }
 
-  getAllProperty = () => {
+  getAllProperty = async () => {
     let arrProperty = [];
     let indexTMP = 0;
 
-    this.props.allPropertyReducers.map((item) => {
+    await this.props.allPropertyReducers.map((item) => {
       arrProperty.push({
         id: indexTMP++,
         label: item.NAME,
@@ -82,7 +96,7 @@ export default class LoginComponent extends React.Component {
     });
 
     this.setState({valueProperty: arrProperty}, () => {
-      this.setState({propertySelection: arrProperty[0]});
+      this.setState({propertySelection: arrProperty[0]}, () => {});
       this.getOutlet(this.state.valueProperty[0].value);
     });
   };
@@ -106,6 +120,24 @@ export default class LoginComponent extends React.Component {
       this.setState({outletSelection: arrOutlet[0]}),
     );
   };
+  postRegisterDevice = () => {
+    if (this._isMounted) {
+      this.setState(
+        {
+          deviceBodyCheck: {
+            ...this.state.deviceBodyCheck,
+            PROPERTY_CODE: this.state.propertySelection.value,
+            OUTLET_ID: this.state.outletSelection.value,
+            LANG_CODE: 'en',
+          },
+        },
+        () => {
+          this.props.onPostRegisterDeviceAction(this.state.deviceBodyCheck);
+        },
+      );
+    }
+  };
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -124,17 +156,21 @@ export default class LoginComponent extends React.Component {
           offModal={() =>
             this.setState({visibleRegister: false, opacityView: false})
           }
+<<<<<<< HEAD
+=======
+          postRegisterDevicee={() => this.postRegisterDevice()}
+>>>>>>> 828f05813c5694a9dd9e3f3723423a13d6244d04
         />
         <ScrollView
-          contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
-          <View style={{ alignItems: 'center' }}>
+          contentContainerStyle={[{justifyContent: 'center', flexGrow: 1}]}>
+          <View style={{alignItems: 'center'}}>
             <Image
               resizeMode="contain"
               source={images.ic_fpt_is}
-              style={{ width: '30%' }}
+              style={{width: '30%'}}
             />
           </View>
-          <View style={{ marginTop: Sizes.s40 }}>
+          <View style={{marginTop: Sizes.s40}}>
             <Picker
               style={{
                 width: '80%',
@@ -153,7 +189,6 @@ export default class LoginComponent extends React.Component {
                 )
               }
             />
-
             <Picker
               style={{
                 width: '80%',
@@ -168,7 +203,7 @@ export default class LoginComponent extends React.Component {
               value={this.state.outletSelection}
               onChangeItem={(item) => this.setState({outletSelection: item})}
             />
-            <Button
+            {/* <Button
               title="check"
               onPress={() =>
                 console.log(
@@ -176,7 +211,7 @@ export default class LoginComponent extends React.Component {
                   this.state.propertySelection,
                 )
               }
-            />
+            /> */}
 
             <View
               style={{
@@ -194,7 +229,7 @@ export default class LoginComponent extends React.Component {
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
-                onChangeText={(text) => this.setState({ passCode: text })}
+                onChangeText={(text) => this.setState({passCode: text})}
               />
             </View>
 
@@ -205,7 +240,7 @@ export default class LoginComponent extends React.Component {
                 marginTop: Sizes.s15,
                 marginLeft: Sizes.s25,
               }}>
-              <Text style={{ color: colors.red, fontWeight: 'bold' }}>
+              <Text style={{color: colors.red, fontWeight: 'bold'}}>
                 {this.state.passCode === '' ? 'Passcode is not empty!' : ''}
               </Text>
             </View>

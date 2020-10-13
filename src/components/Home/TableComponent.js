@@ -31,7 +31,7 @@ class TableComponent extends Component {
         const { visibleInfoGuest } = this.state;
 
         return (
-            <View style={styles.table} >
+            <View style={styles.table} key={this.props.key} >
                 <TouchableOpacity onPress={() => { this.openModal() }}>
                     <View style={styles.headerTable}>
                         <Text>Bar 10</Text>

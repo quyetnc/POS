@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
 import Table from './TableComponent';
-import ViewOpaticy from '../Custom/ViewOpaticy'
 import TabLocation from './TabLocation'
 export default class HomeComponent extends Component {
   constructor(props) {
@@ -22,13 +21,18 @@ export default class HomeComponent extends Component {
       visibleInfoGuest: false,
     };
   }
-
+  componentDidMount() {
+    this.props.onGetAllTableMapAction({
+      "PROPERTY_CODE": "LAR",
+      "OUTLET_ID": 1124
+    })
+  }
   render() {
     const { data } = this.state;
     const ItemTable = data.map((item, index) => {
       return (<Table
         navigation={this.props.navigation}
-        key={index}
+        key={item.id}
         name={item.name}
         user={item.user}
         price={item.price}
@@ -46,11 +50,7 @@ export default class HomeComponent extends Component {
           <TabLocation />
           <ScrollView>
             <View style={styles.content}>
-              {this.state.opacityView === true ? (
-                <ViewOpaticy />
-              ) :
-                null
-              }
+
               {ItemTable}
             </View>
           </ScrollView>

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import allPropertyReducers from './Login/AllPropertyReducers';
 import outletReducers from './Login/OutletReducers';
-import tableMapReducers from './Table/TableMapReducers'
+import registerDeviceReducers from './Login/RegisterDeviceReducers';
 const allReducers = combineReducers({
   allPropertyReducers,
   outletReducers,
-  tableMapReducers
+  registerDeviceReducers,
 });
 
 export default allReducers;

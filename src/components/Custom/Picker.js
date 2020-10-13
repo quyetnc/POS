@@ -26,11 +26,20 @@ export default class Picker extends Component {
     };
   }
   componentDidMount() {
+    
     if (this.props.value != null) {
-      this.setState({selectedItem: this.props.value});
+      // console.log(this.props.value);
+      this.setState({selectedItem: this.props.value}, () => {});
     }
   }
-  componentDidUpdate() {}
+
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      this.setState({
+        selectedItem: this.props.value,
+      });
+    }
+  }
   render() {
     const {isShowModal, selectedItem} = this.state;
     const {

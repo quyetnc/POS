@@ -34,6 +34,7 @@ export default class LoginComponent extends React.Component {
       opacityView: false,
       propertyShow: false,
       outletShow: false,
+      deviceBodyFull: [],
     };
   }
   async componentDidMount() {
@@ -76,6 +77,20 @@ export default class LoginComponent extends React.Component {
       this.props.statusRegisterDevice === true
         ? alert('Register Device Success!')
         : {};
+    }
+    if (prevProps.statusCheckDevice !== this.props.statusCheckDevice) {
+      if (this.props.statusCheckDevice.status === 0)
+      {
+        alert(this.props.statusCheckDevice.mess);
+      }
+       else{
+         console.log(this.props.statusCheckDevice)
+         alert ("Login Success")
+         setTimeout(() => {
+          this.props.navigation.navigate("Home")
+         }, 1000);
+       
+       }
     }
   }
 
@@ -134,6 +149,34 @@ export default class LoginComponent extends React.Component {
     }
   };
 
+  postCheckDevice = () => {
+    if (this._isMounted) {
+      this.setState(
+        {
+          deviceBodyCheck: {
+            ...this.state.deviceBodyCheck,
+            PROPERTY_CODE: this.state.propertySelection.value,
+            OUTLET_ID: this.state.outletSelection.value,
+          },
+          deviceBodyFull: {
+            PROPERTY_CODE: this.state.propertySelection.value,
+            OUTLET_ID: this.state.outletSelection.value,
+            // NAME_INTERNAL: this.state.deviceBodyCheck.NAME,
+            NAME_INTERNAL: '2913700881fe2765',
+            PASSCODE: this.state.passCode,
+          },
+        },
+        () => {
+          box = [this.state.deviceBodyCheck, this.state.deviceBodyFull];
+          this.props.onPostCheckDeviceAction(box);
+        },
+      );
+    }
+  };
+
+  onLogin = () => {
+    this.postCheckDevice();
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -253,7 +296,7 @@ export default class LoginComponent extends React.Component {
                   backgroundColor: 'aqua',
                   padding: Sizes.s15,
                 }}
-                onPress={() => this.props.navigation.navigate('Home')}>
+                onPress={() => this.onLogin()}>
                 <Text>Login</Text>
               </TouchableOpacity>
             </View>

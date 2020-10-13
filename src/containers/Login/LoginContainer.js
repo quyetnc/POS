@@ -6,6 +6,7 @@ import {
   getOutletAction,
 } from '../../redux/actions/Login/LoginAction';
 import {postRegisterDeviceAction} from '../../redux/actions/Login/RegisterDeviceAction';
+import {postCheckDeviceAction} from '../../redux/actions/Login/CheckDeviceAction';
 
 export class LoginContainer extends Component {
   render() {
@@ -14,10 +15,12 @@ export class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+   
   return {
     allPropertyReducers: state.allPropertyReducers,
     outletReducers: state.outletReducers,
     statusRegisterDevice: state.registerDeviceReducers,
+    statusCheckDevice: state.checkDeviceReducers,
   };
 };
 
@@ -31,6 +34,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     onPostRegisterDeviceAction: (info) => {
       dispatch(postRegisterDeviceAction(info));
+    },
+    onPostCheckDeviceAction: (info) => {
+      dispatch(postCheckDeviceAction(info));
+      // console.log('okkkkk');
     },
   };
 };

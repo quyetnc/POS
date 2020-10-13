@@ -4,3 +4,4 @@ export const Token = async () => {
     const jsonValue = await AsyncStorage.getItem("dataStorage");
     return jsonValue !== null ? JSON.parse(jsonValue) : null;
 };
+ 

@@ -65,13 +65,13 @@ export default class LoginComponent extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    // if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
-    //   this.getAllProperty();
-    // }
+    if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
+      this.getAllProperty();
+    }
 
-    // if (prevProps.outletReducers !== this.props.outletReducers) {
-    //   this.setOutlet();
-    // }
+    if (prevProps.outletReducers !== this.props.outletReducers) {
+      this.setOutlet();
+    }
 
     if (prevProps.statusRegisterDevice !== this.props.statusRegisterDevice) {
       this.props.statusRegisterDevice === true

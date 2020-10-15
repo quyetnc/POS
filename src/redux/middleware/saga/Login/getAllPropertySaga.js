@@ -11,7 +11,7 @@ function* getAllProperty() {
   let response = yield get_AllProperty();
   // console.log(response);
 // console.log('ok')
-  //   const error = response.message;
+   
     if (response !== undefined) {
       // if (response.resultCode === 1) {
        

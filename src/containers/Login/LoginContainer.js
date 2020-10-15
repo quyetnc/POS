@@ -15,7 +15,7 @@ export class LoginContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-   
+  
   return {
     allPropertyReducers: state.allPropertyReducers,
     outletReducers: state.outletReducers,

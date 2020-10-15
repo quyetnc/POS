@@ -81,17 +81,14 @@ export default class LoginComponent extends React.Component {
     if (prevProps.statusCheckDevice !== this.props.statusCheckDevice) {
       if (this.props.statusCheckDevice.status === 0) {
         alert(this.props.statusCheckDevice.mess);
-      }
-      else {
-        console.log(this.props.statusCheckDevice)
-        alert("Login Success")
+      } else {
+        console.log(this.props.statusCheckDevice);
+        alert('Login Success');
         setTimeout(() => {
-          this.props.navigation.navigate("Home")
+          this.props.navigation.navigate('Home');
         }, 1000);
-
       }
     }
-
   }
 
   getAllProperty = async () => {
@@ -296,6 +293,7 @@ export default class LoginComponent extends React.Component {
                   backgroundColor: 'aqua',
                   padding: Sizes.s15,
                 }}
+                disabled={this.state.passCode == '' ? true : false}
                 onPress={() => this.onLogin()}>
                 <Text>Login</Text>
               </TouchableOpacity>

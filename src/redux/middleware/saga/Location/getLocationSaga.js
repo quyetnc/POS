@@ -6,8 +6,8 @@ import { getLocation } from '../../api/Location/getLocationApi';
 
 function* get_Location() {
     let response = yield getLocation();
-
     console.log('saga:', response);
+    console.log()
     // console.log('Location Saga');
 }
 

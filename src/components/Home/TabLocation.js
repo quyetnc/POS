@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
-// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-// const Tab = createMaterialTopTabNavigator();
 class TabLocation extends Component {
 
     constructor(props) {
@@ -50,22 +48,7 @@ class TabLocation extends Component {
                     </ScrollView>
                 </View>
             </View>
-            // <Tab.Navigator
-            //     tabBarOptions={{
-            //         scrollEnabled: true,
-            //         activeTintColor: "tomato",
-            //         inactiveTintColor: "gray",
-            //         indicatorStyle: {
-            //             backgroundColor: "transparent"
-            //         },
-            //         tabStyle: {
-            //             width: 100
-            //         }
-            //     }}>
-            //     <Tab.Screen>
-            //         {this.renderTabLayout()}
-            //     </Tab.Screen>
-            // </Tab.Navigator>
+
         );
     }
 }

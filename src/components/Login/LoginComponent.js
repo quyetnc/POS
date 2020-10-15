@@ -65,35 +65,33 @@ export default class LoginComponent extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    // if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
-    //   this.getAllProperty();
-    // }
+    if (prevProps.allPropertyReducers !== this.props.allPropertyReducers) {
+      this.getAllProperty();
+    }
 
-    // if (prevProps.outletReducers !== this.props.outletReducers) {
-    //   this.setOutlet();
-    // }
+    if (prevProps.outletReducers !== this.props.outletReducers) {
+      this.setOutlet();
+    }
 
-    // if (prevProps.statusRegisterDevice !== this.props.statusRegisterDevice) {
-    //   this.props.statusRegisterDevice === true
-    //     ? alert('Register Device Success!')
-    //     : {};
-    // }
-    // if (prevProps.statusCheckDevice !== this.props.statusCheckDevice) {
-    //   if (this.props.statusCheckDevice.status === 0) {
-    //     alert(this.props.statusCheckDevice.mess);
-    //   }
-    //   else {
-    //     console.log(this.props.statusCheckDevice)
-    //     alert("Login Success")
-    //     setTimeout(() => {
-    //       this.props.navigation.navigate("Home")
-    //     }, 1000);
+    if (prevProps.statusRegisterDevice !== this.props.statusRegisterDevice) {
+      this.props.statusRegisterDevice === true
+        ? alert('Register Device Success!')
+        : {};
+    }
+    if (prevProps.statusCheckDevice !== this.props.statusCheckDevice) {
+      if (this.props.statusCheckDevice.status === 0) {
+        alert(this.props.statusCheckDevice.mess);
+      }
+      else {
+        console.log(this.props.statusCheckDevice)
+        alert("Login Success")
+        setTimeout(() => {
+          this.props.navigation.navigate("Home")
+        }, 1000);
 
-    //   }
-    // }
-    setTimeout(() => {
-      this.props.navigation.navigate("Home")
-    }, 1000);
+      }
+    }
+
   }
 
   getAllProperty = async () => {

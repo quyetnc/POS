@@ -19,7 +19,7 @@ export async function getLocation() {
         .then((response) => response.json())
         .then((result) => {
 
-            // console.log(response);
+            console.log('Api:', response);
             return result;
         })
         .catch((error) => {

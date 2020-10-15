@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
-import { ScrollView } from 'react-native-gesture-handler';
+// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+// const Tab = createMaterialTopTabNavigator();
 class TabLocation extends Component {
 
     constructor(props) {
@@ -13,6 +15,7 @@ class TabLocation extends Component {
         }
 
     }
+
     renderTabLayout() {
         const data = [
             { id: 1, item: 'A' },
@@ -39,7 +42,7 @@ class TabLocation extends Component {
     render() {
 
         return (
-            <View style={styles.container}>
+            <View style={styles.container} >
                 <View style={styles.TabCustom}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, }}>
                         <View style={{ flexDirection: 'row' }}>{this.renderTabLayout()}</View>
@@ -47,6 +50,22 @@ class TabLocation extends Component {
                     </ScrollView>
                 </View>
             </View>
+            // <Tab.Navigator
+            //     tabBarOptions={{
+            //         scrollEnabled: true,
+            //         activeTintColor: "tomato",
+            //         inactiveTintColor: "gray",
+            //         indicatorStyle: {
+            //             backgroundColor: "transparent"
+            //         },
+            //         tabStyle: {
+            //             width: 100
+            //         }
+            //     }}>
+            //     <Tab.Screen>
+            //         {this.renderTabLayout()}
+            //     </Tab.Screen>
+            // </Tab.Navigator>
         );
     }
 }

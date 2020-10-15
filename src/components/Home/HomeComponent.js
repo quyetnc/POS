@@ -17,16 +17,23 @@ export default class HomeComponent extends Component {
         { id: 7, name: '', user: '', price: '' },
         { id: 7, name: '', user: '', price: '' },
       ],
+
       opacityView: false,
       visibleInfoGuest: false,
     };
   }
+
   componentDidMount() {
-    this.props.onGetAllTableMapAction({
+    this.getDataFloor();
+  }
+
+  getDataFloor = () => {
+    this.props.onGetLocationAction({
       "PROPERTY_CODE": "LAR",
       "OUTLET_ID": 1124
-    })
+    });
   }
+
   render() {
     const { data } = this.state;
     const ItemTable = data.map((item, index) => {

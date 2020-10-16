@@ -13,6 +13,19 @@ class TableComponent extends Component {
             countGuest: 0
         };
     }
+
+
+    currencyFormat = (num) => {
+        return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    };
+
+    decimalHoursToString = (hoursDecimal) => {
+
+        const numMinutes = (hoursDecimal % 60);
+        const numHours = (hoursDecimal - numMinutes) / 60
+        return numHours + ':' + numMinutes;
+
+    }
     onChangeNameGuest = input => {
         this.setState({ nameGuest: input });
     }
@@ -28,20 +41,21 @@ class TableComponent extends Component {
     }
 
     render() {
+
         const { visibleInfoGuest } = this.state;
 
         return (
             <View style={styles.table} key={this.props.key} >
                 <TouchableOpacity onPress={() => { this.openModal() }}>
                     <View style={styles.headerTable}>
-                        <Text>Bar 10</Text>
-                        <Text>2157:54</Text>
+                        <Text>{this.props.NAME}</Text>
+                        <Text>{this.decimalHoursToString(this.props.MINUTE_ORDER)}</Text>
                         <Icon name='ellipsis-v' size={20} color='black' />
                     </View>
                     <View style={styles.contentTable}>
-                        <Text>{this.props.name}</Text>
-                        <Text>{this.props.user}</Text>
-                        <Text>{this.props.price}</Text>
+                        <Text>{this.props.GUEST_NAME}</Text>
+                        <Text>{this.props.WAITER}</Text>
+                        <Text>{this.currencyFormat(this.props.BALANCE)}</Text>
                     </View>
                 </TouchableOpacity>
                 <Modal visible={visibleInfoGuest}

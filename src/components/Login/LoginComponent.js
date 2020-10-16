@@ -262,6 +262,7 @@ export default class LoginComponent extends React.Component {
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
+                keyboardType='numeric'
                 onChangeText={(text) => this.setState({ passCode: text })}
               />
             </View>

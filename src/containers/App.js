@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Image, View, Text} from 'react-native';
-import {createAppContainer} from 'react-navigation'; // 1.0.0-beta.27
-import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import { Button, Image, View, Text } from 'react-native';
+import { createAppContainer } from 'react-navigation'; // 1.0.0-beta.27
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import LoginContainer from './Login/LoginContainer';
 import HomeContainer from './Home/HomeContainer';
@@ -53,7 +53,7 @@ const TabNavigator = createBottomTabNavigator({
 
 const HomeTab = createAppContainer(TabNavigator);
 
- 
+
 const RootStack = createStackNavigator(
   {
     Login: {
@@ -65,7 +65,7 @@ const RootStack = createStackNavigator(
     },
   },
   {
-    initialRouteName : 'Login',
+    initialRouteName: 'Login',
     mode: 'modal',
     headerMode: 'none',
   },

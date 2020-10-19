@@ -16,14 +16,26 @@ class TableComponent extends Component {
 
 
     currencyFormat = (num) => {
-        return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        if (num == 0) {
+            return ""
+        }
+        else {
+            return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+
     };
 
     decimalHoursToString = (hoursDecimal) => {
 
         const numMinutes = (hoursDecimal % 60);
-        const numHours = (hoursDecimal - numMinutes) / 60
-        return numHours + ':' + numMinutes;
+        const numHours = (hoursDecimal - numMinutes) / 60;
+        if (hoursDecimal == 0) {
+            return ""
+        }
+        else {
+            return numHours + ':' + numMinutes;
+
+        }
 
     }
     onChangeNameGuest = input => {
@@ -49,19 +61,21 @@ class TableComponent extends Component {
                 <TouchableOpacity onPress={() => { this.openModal() }}>
                     <View style={styles.headerTable}>
                         <Text>{this.props.NAME}</Text>
+
                         <Text>{this.decimalHoursToString(this.props.MINUTE_ORDER)}</Text>
                         <Icon name='ellipsis-v' size={20} color='black' />
                     </View>
                     <View style={styles.contentTable}>
                         <Text>{this.props.GUEST_NAME}</Text>
                         <Text>{this.props.WAITER}</Text>
-                        <Text>{this.currencyFormat(this.props.BALANCE)}</Text>
+                        <Text>{this.currencyFormat(this.props.BALANCE) ?? ''}</Text>
                     </View>
                 </TouchableOpacity>
                 <Modal visible={visibleInfoGuest}
                     transparent={true}
                     animationType="fade"
                 ><View style={{ flex: 1, backgroundColor: '#00000050' }}></View></Modal>
+
                 <Modal visible={visibleInfoGuest}
                     transparent={true}
                     animationType="fade"

@@ -5,7 +5,7 @@ import { watchGetOutlet } from './Login/getOutletSaga';
 import { watchRegisterDevice } from './Login/postRegisterDeviceSaga';
 import { watchGetLocationTable } from './LocationTable/getLocationTableSaga';
 import { watchCheckDevice } from './Login/postCheckDeviceSaga';
-
+import { watchGetFindGuest } from './FindGuest/FindGuestSaga';
 export default function* rootSaga() {
   yield all([
     watchAllProperty(),
@@ -13,5 +13,6 @@ export default function* rootSaga() {
     watchRegisterDevice(),
     watchGetLocationTable(),
     watchCheckDevice(),
+    watchGetFindGuest(),
   ]);
 }

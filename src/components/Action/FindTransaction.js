@@ -5,10 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 class FindTransaction extends Component {
     render() {
         return (
-            <TouchableOpacity style={styles.backgourdMenu}>
-                <Icon name='search' size={30} />
-                <Text style={{ paddingVertical: Sizes.s10 }}> FindTransaction </Text>
-            </TouchableOpacity>
+            <Text style={{ paddingVertical: Sizes.s10 }}> FindTransaction </Text>
         )
     }
 }

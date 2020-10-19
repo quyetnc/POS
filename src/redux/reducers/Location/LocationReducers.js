@@ -1,4 +1,3 @@
-import { act } from 'react-test-renderer';
 import *as Types from '../../actions/Location/LocationAction';
 
 var intialState = [];

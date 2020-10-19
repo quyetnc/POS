@@ -1,12 +1,13 @@
 import { userData, API_URL, userOutLet } from '../../../../config/settings';
 
-export async function getLocation() {
+export async function getFindGuest() {
     const TOKEN = userData.TOKEN;
 
 
     const body = {
         PROPERTY_CODE: userData.PROPERTY_CODE,
-        OUTLET_ID: userData.OUTLET_ID
+        SEARCH_TYPE5: true,
+        SEARCH_TYPE9: true
     }
 
     var myHeaders = new Headers();
@@ -16,7 +17,7 @@ export async function getLocation() {
     );
 
     const response = await fetch(
-        `${API_URL}Location/loadDataPosPlan/`,
+        `${API_URL}GuestCheck/getInhousePostIt/`,
 
         {
             method: 'POST',
@@ -27,7 +28,6 @@ export async function getLocation() {
         .then((response) => response.json())
         .then((result) => {
 
-            // console.log('ApiNew:', result);
             return result;
         })
         .catch((error) => {

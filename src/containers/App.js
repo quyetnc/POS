@@ -1,17 +1,19 @@
 import React from 'react';
-import { Button, Image, View, Text } from 'react-native';
 import { createAppContainer } from 'react-navigation'; // 1.0.0-beta.27
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
 import LoginContainer from './Login/LoginContainer';
 import HomeContainer from './Home/HomeContainer';
 import ActionContainer from './Action/ActionContainer';
 import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import OrderItemContainer from './OrderItem/OrderItemContainer';
-import AsyncStorage from '@react-native-community/async-storage';
 import AboutContainer from './Setting/AboutContainer'
+import FindTransaction from './Action/FindTransactionContainer';
+import FindGuestContainer from './Action/FindGuestContainer';
+import FindTransactionContainer from './Action/FindTransactionContainer';
+
+
 const HomeStack = createStackNavigator(
   {
     HomeMain: {
@@ -43,6 +45,15 @@ const SettingStack = createStackNavigator(
   },
 );
 
+const ActionStack = createStackNavigator({
+  ActionContainer: ActionContainer,
+},
+  {
+    initialRouteName: 'ActionContainer',
+    mode: 'modal',
+    headerMode: 'none',
+  })
+
 const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
@@ -52,7 +63,7 @@ const TabNavigator = createBottomTabNavigator({
     },
   },
   Action: {
-    screen: ActionContainer,
+    screen: ActionStack,
     navigationOptions: {
       tabBarLabel: 'Mở rộng',
       tabBarIcon: () => <Icon name="ellipsis-h" size={20} color="#4dbd73" />,
@@ -78,6 +89,8 @@ const RootStack = createStackNavigator(
     Home: {
       screen: HomeTab,
     },
+    FindTransaction: FindTransactionContainer,
+    FindGuest: FindGuestContainer
   },
   {
     initialRouteName: 'Login',

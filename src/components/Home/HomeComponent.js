@@ -22,16 +22,6 @@ export default class HomeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: [
-      //   { id: 1, name: 'KHACHLE', user: 'CUONGLT_POS', price: '1,507,275.00' },
-      //   { id: 2, name: 'KHACHLE1', user: 'CUONGLT_POS1', ponGetLocationTableActionrice: '3,507,275.00' },
-      //   { id: 3, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
-      //   { id: 4, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
-      //   { id: 5, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
-      //   { id: 6, name: 'KHACHLE2', user: 'CUONGLT_POS2', price: '2,507,275.00' },
-      //   { id: 7, name: '', user: '', price: '' },
-      //   { id: 7, name: '', user: '', price: '' },
-      // ],
       tabData: [],
       tableData: [],
       opacityView: false,

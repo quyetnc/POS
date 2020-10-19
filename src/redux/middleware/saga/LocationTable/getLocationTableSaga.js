@@ -19,8 +19,6 @@ function* getLocation_Table() {
     } else {
         yield put({ type: Types.GET_LOCATION_TABLE_ERROR, error });
     }
-
-
 }
 
 

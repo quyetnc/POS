@@ -28,7 +28,7 @@ export default class Picker extends Component {
   componentDidMount() {
     
     if (this.props.value != null) {
-      // console.log(this.props.value);
+     
       this.setState({selectedItem: this.props.value}, () => {});
     }
   }

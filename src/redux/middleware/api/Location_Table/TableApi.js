@@ -2,6 +2,7 @@ import { userData, API_URL, userOutLet } from '../../../../config/settings';
 
 export async function getTable() {
     const TOKEN = userData.TOKEN;
+    // console.log(TOKEN);
 
     const body = {
         PROPERTY_CODE: userData.PROPERTY_CODE,

@@ -6,7 +6,7 @@ import { getTable } from '../../api/Table/getTableApi';
 
 function* get_Table() {
     let response = yield getTable();
-    console.log("saga:", response)
+    // console.log("saga:", response)
     // if (response !== undefined) {
     //     yield put({ type: Types.GET_TABLE_SUCCESS, response: response });
     // } else {

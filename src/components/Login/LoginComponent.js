@@ -82,7 +82,7 @@ export default class LoginComponent extends React.Component {
       if (this.props.statusCheckDevice.status === 0) {
         alert(this.props.statusCheckDevice.mess);
       } else {
-        console.log(this.props.statusCheckDevice);
+        // console.log(this.props.statusCheckDevice);
         alert('Login Success');
         setTimeout(() => {
           this.props.navigation.navigate('Home');

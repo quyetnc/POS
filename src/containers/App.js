@@ -11,7 +11,7 @@ import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import OrderItemContainer from './OrderItem/OrderItemContainer';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import AboutContainer from './Setting/AboutContainer'
 const HomeStack = createStackNavigator(
   {
     HomeMain: {
@@ -19,6 +19,22 @@ const HomeStack = createStackNavigator(
     },
     OrderItem: {
       screen: OrderItemContainer,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+);
+
+
+const SettingStack = createStackNavigator(
+  {
+    SettingOption: {
+      screen: SettingContainer,
+    },
+    About: {
+      screen: AboutContainer,
     },
   },
   {
@@ -43,14 +59,13 @@ const TabNavigator = createBottomTabNavigator({
     },
   },
   Setting: {
-    screen: SettingContainer,
+    screen: SettingStack,
     navigationOptions: {
       tabBarLabel: 'Hệ thống',
       tabBarIcon: () => <Icon name="cog" size={20} color="#4dbd73" />,
     },
   },
 });
-
 const HomeTab = createAppContainer(TabNavigator);
 
 

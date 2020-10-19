@@ -1,21 +1,79 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
-const SettingComponents = props => {
-
+import React, {Component} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
+import {Sizes} from '@dungdang/react-native-basic';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {userData} from '../../config/settings';
+export default class SettingComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tabData: [],
+      tableData: [],
+      opacityView: false,
+      visibleInfoGuest: false,
+      locationSelected: 0,
+    };
+  }
+  render() {
     return (
-        <View style={styles.container}>
-            <Text>Setting</Text>
+      <View style={styles.container}>
+        <SafeAreaView style={styles.header}>
+          <Text style={styles.titile}>Setting</Text>
+        </SafeAreaView>
+        <View>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('About')}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                height: Sizes.s50,
+                borderBottomWidth: 1,
+              }}>
+              <Text style={{marginLeft: Sizes.s10}}>About</Text>
+              <Icon
+                style={{marginRight: Sizes.s15}}
+                name="angle-right"
+                size={Sizes.s20}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
-    )
+      </View>
+    );
+  }
 }
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
-
-export default SettingComponents;
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: Sizes.s50,
+    backgroundColor: '#4dbd73',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titile: {
+    color: '#fff',
+    fontSize: Sizes.h18,
+    fontWeight: 'bold',
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    margin: Sizes.s10,
+    padding: Sizes.s10,
+    flexWrap: 'wrap',
+  },
+});

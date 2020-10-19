@@ -12,7 +12,8 @@ export const userData = {
   CASHIER_DATE: '',
   TOKEN: null,
   ORDER_TYPE_ID: 0,
-  OUTLET_ID: null
+  OUTLET_ID: null,
+  DEVICE_CODE : null
 };
 
 

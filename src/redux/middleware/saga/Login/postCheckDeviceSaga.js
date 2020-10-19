@@ -3,10 +3,10 @@ import {
   POST_CHECK_DEVICE_SUCCESS,
   POST_CHECK_DEVICE_ERROR,
 } from '../../../actions/Login/CheckDeviceAction';
-import {call, takeEvery, put} from 'redux-saga/effects';
-import {post_Check_Device} from '../../api/Login/postCheckDeviceApi';
-import {post_Login_Passcode} from '../../api/Login/postLoginHavePasscodeApi';
-import {userData, storeIsLogin} from '../../../../config/settings';
+import { call, takeEvery, put } from 'redux-saga/effects';
+import { post_Check_Device } from '../../api/Login/postCheckDeviceApi';
+import { post_Login_Passcode } from '../../api/Login/postLoginHavePasscodeApi';
+import { userData, storeIsLogin } from '../../../../config/settings';
 
 function* checkRegisterDevice(action) {
   let response = yield post_Check_Device(action.data[0]);
@@ -17,10 +17,10 @@ function* checkRegisterDevice(action) {
     if (result.TOKEN == null) {
       yield put({
         type: POST_CHECK_DEVICE_ERROR,
-        response: {status: 0, mess: 'Passcode Sai'},
+        response: { status: 0, mess: 'Passcode Sai' },
       });
     } else {
-      storeIsLogin(true)
+
       (userData.PROPERTY_CODE = action.data[1].PROPERTY_CODE),
         (userData.CASHIER_ID = result.CASHIER_ID),
         (userData.POS_CASHIER_WORK_ID = result.POS_CASHIER_WORK_ID),
@@ -30,20 +30,18 @@ function* checkRegisterDevice(action) {
         (userData.PASSCODE = result.PASSCODE),
         (userData.CASHIER_DATE = result.CASHIER_DATE),
         (userData.TOKEN = result.TOKEN),
-        (userData.ORDER_TYPE_ID = result.ORDER_TYPE_ID);
-      yield put({type: POST_CHECK_DEVICE_SUCCESS, response: result});
+        (userData.ORDER_TYPE_ID = result.ORDER_TYPE_ID),
+        (userData.OUTLET_ID = action.data[1].OUTLET_ID),
+
+        yield put({ type: POST_CHECK_DEVICE_SUCCESS, response: result });
     }
   } else {
     yield put({
       type: POST_CHECK_DEVICE_ERROR,
-      response: {status: 0, mess: 'TB chua DK'},
+      response: { status: 0, mess: 'TB chua DK' },
     });
   }
-  // if (response == true) {
-  //   yield put({type: POST_CHECK_DEVICE_SUCCESS, response: response});
-  // } else {
-  //   yield put({type: POST_CHECK_DEVICE_ERROR, error});
-  // }
+
 }
 
 export function* watchCheckDevice() {

@@ -1,40 +1,38 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
-// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-// const Tab = createMaterialTopTabNavigator();
+
 class TabLocation extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             tabData: [],
-            tableData: [],
             selectedFloor: 1
         }
 
     }
+    async componentDidMount() {
+        this.setState({ tabData: this.props.data, selectedFloor: this.props.LocationSelected })
+    }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.data !== prevProps.data) {
+            this.setState({
+                tabData: this.props.data,
+                selectedFloor: this.props.LocationSelected
+            });
+        }
+    }
     renderTabLayout() {
-        const data = [
-            { id: 1, item: 'A' },
-            { id: 2, item: 'B' },
-            { id: 3, item: 'C' },
-            { id: 4, item: 'D' },
-            { id: 5, item: 'E' },
-            { id: 6, item: 'F' },
-            { id: 7, item: 'G' },
-            { id: 8, item: 'H' },
-            { id: 9, item: 'I' },
 
-        ]
         let floor = [];
-        data.map((item, index) => {
+        this.state.tabData.map((item, index) => {
             floor.push(
                 <TouchableOpacity onPress={() => {
-                    this.setState({ selectedFloor: item.id })
-                }} style={styles.itemFloor} key={index}><Text style={this.state.selectedFloor === item.id ? { color: 'red' } : { color: 'black' }}>{item.item}</Text></TouchableOpacity>
+                    this.setState({ selectedFloor: item.id }, () => this.props.onChangeSelect(item.value))
+                }} style={styles.itemFloor} key={index}><Text style={this.state.selectedFloor === item.id ? { color: 'red' } : { color: 'black' }}>{item.label}</Text></TouchableOpacity>
             )
         })
         return floor;
@@ -46,26 +44,10 @@ class TabLocation extends Component {
                 <View style={styles.TabCustom}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, }}>
                         <View style={{ flexDirection: 'row' }}>{this.renderTabLayout()}</View>
-
                     </ScrollView>
                 </View>
             </View>
-            // <Tab.Navigator
-            //     tabBarOptions={{
-            //         scrollEnabled: true,
-            //         activeTintColor: "tomato",
-            //         inactiveTintColor: "gray",
-            //         indicatorStyle: {
-            //             backgroundColor: "transparent"
-            //         },
-            //         tabStyle: {
-            //             width: 100
-            //         }
-            //     }}>
-            //     <Tab.Screen>
-            //         {this.renderTabLayout()}
-            //     </Tab.Screen>
-            // </Tab.Navigator>
+
         );
     }
 }

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ActivityIndicatorBase,
 } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
@@ -35,6 +36,7 @@ export default class LoginComponent extends React.Component {
       propertyShow: false,
       outletShow: false,
       deviceBodyFull: [],
+      isLoading: false
     };
   }
   async componentDidMount() {
@@ -83,8 +85,11 @@ export default class LoginComponent extends React.Component {
         alert(this.props.statusCheckDevice.mess);
       } else {
         // console.log(this.props.statusCheckDevice);
-        alert('Login Success');
+
         setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
           this.props.navigation.navigate('Home');
         }, 1000);
       }
@@ -164,7 +169,7 @@ export default class LoginComponent extends React.Component {
           },
         },
         () => {
-          box = [this.state.deviceBodyCheck, this.state.deviceBodyFull];
+          let box = [this.state.deviceBodyCheck, this.state.deviceBodyFull];
           this.props.onPostCheckDeviceAction(box);
         },
       );
@@ -173,10 +178,16 @@ export default class LoginComponent extends React.Component {
 
   onLogin = () => {
     this.postCheckDevice();
+    this.setState({
+      isLoading: true
+    })
   };
   render() {
+    const { isLoading } = this.state;
+    const Loading = isLoading === true ? <ActivityIndicatorBase size="large" color="#00ff00" /> : null
     return (
       <SafeAreaView style={styles.container}>
+
         {this.state.opacityView === true ? <ViewOpaticy /> : <View />}
 
         <RegisterDeviceModal
@@ -196,7 +207,9 @@ export default class LoginComponent extends React.Component {
         />
         <ScrollView
           contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
+
           <View style={{ alignItems: 'center' }}>
+
             <Image
               resizeMode="contain"
               source={images.ic_fpt_is}
@@ -236,15 +249,6 @@ export default class LoginComponent extends React.Component {
               value={this.state.outletSelection}
               onChangeItem={(item) => this.setState({ outletSelection: item })}
             />
-            {/* <Button
-              title="check"
-              onPress={() =>
-                console.log(
-                  this.state.outletSelection,
-                  this.state.propertySelection,
-                )
-              }
-            /> */}
 
             <View
               style={{
@@ -275,7 +279,7 @@ export default class LoginComponent extends React.Component {
                 marginLeft: Sizes.s25,
               }}>
               <Text style={{ color: colors.red, fontWeight: 'bold' }}>
-                {this.state.passCode === '' ? 'Passcode is not empty!' : ''}
+                {this.state.passCode === '' ? 'Passcode không được để trống!' : ''}
               </Text>
             </View>
 
@@ -296,7 +300,7 @@ export default class LoginComponent extends React.Component {
                 }}
                 disabled={this.state.passCode == '' ? true : false}
                 onPress={() => this.onLogin()}>
-                <Text>Login</Text>
+                <Text style={{ color: 'white' }}>Đăng nhập</Text>
               </TouchableOpacity>
             </View>
 
@@ -305,7 +309,7 @@ export default class LoginComponent extends React.Component {
               onPress={() => {
                 this.setState({ opacityView: true, visibleRegister: true });
               }}>
-              <Text style={{ fontWeight: 'bold' }}>Register Device</Text>
+              <Text style={{ fontWeight: 'bold' }}>Đăng ký thiết bị</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

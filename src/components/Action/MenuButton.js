@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 const MenuButton = props => {
     return (
         <TouchableOpacity style={styles.backgourdMenu} onPress={() => props.onPress()}>
-            <Icon name={props.icon} size={30} color='blue' />
-            <Text style={{ paddingVertical: Sizes.s10 }}> {props.title} </Text>
+            <Icon name={props.icon} size={30} color={props.color} />
+            <Text style={{ fontSize: Sizes.h22, }}> {props.title} </Text>
         </TouchableOpacity >
     )
 }
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
         width: '24%',
         height: Sizes.s120,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+
 
     }
 })

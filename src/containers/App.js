@@ -34,9 +34,7 @@ const SettingStack = createStackNavigator(
     SettingOption: {
       screen: SettingContainer,
     },
-    About: {
-      screen: AboutContainer,
-    },
+
   },
   {
     mode: 'modal',
@@ -89,7 +87,8 @@ const RootStack = createStackNavigator(
       screen: HomeTab,
     },
     FindTransaction: FindTransactionContainer,
-    FindGuest: FindGuestContainer
+    FindGuest: FindGuestContainer,
+    About: AboutContainer
   },
   {
     initialRouteName: 'Login',

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,9 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import Picker from '../Custom/Picker';
-import {colors} from '../../res/values/styles/color';
+import { colors } from '../../res/values/styles/color';
 
 export default class RegisterDeviceModal extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ export default class RegisterDeviceModal extends Component {
             }}>
             <TouchableWithoutFeedback>
               <View style={[styles.modal]}>
-                <Text style={styles.title}>Register Device</Text>
+                <Text style={styles.title}>Đăng ký thiết bị</Text>
                 <View
                   style={{
                     flex: 1,
@@ -85,10 +85,10 @@ export default class RegisterDeviceModal extends Component {
                       backgroundColor: 'orange',
                       borderRadius: Sizes.s30,
                       marginRight: Sizes.s20,
-                      width: '15%',
+                      width: '35%',
                       alignItems: 'center',
                     }}>
-                    <Text style={{color: 'white'}}>Cancel</Text>
+                    <Text style={{ color: 'white' }}>Hủy</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
@@ -96,14 +96,14 @@ export default class RegisterDeviceModal extends Component {
                       backgroundColor: 'blue',
                       borderRadius: Sizes.s30,
                       marginRight: '10%',
-                      width: '15%',
+                      width: '35%',
                       alignItems: 'center',
                     }}
                     onPress={() => {
                       this.props.postRegisterDevicee();
                       this.props.offModal();
                     }}>
-                    <Text style={{color: 'white'}}>OK</Text>
+                    <Text style={{ color: 'white' }}>Đăng ký</Text>
                   </TouchableOpacity>
                 </View>
               </View>

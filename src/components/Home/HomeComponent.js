@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   ScrollView,
   Button,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import Table from './TableComponent';
 import TabLocation from './TabLocation';
 import {
@@ -16,7 +16,7 @@ import {
   stringIsEmpty,
 } from '@dungdang/react-native-basic/src/Functions';
 import AsyncStorage from '@react-native-community/async-storage';
-import {userData} from '../../config/settings';
+import { userData } from '../../config/settings';
 import TabLayout from '../Custom/TabLayout';
 export default class HomeComponent extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export default class HomeComponent extends Component {
       if (!objectIsNull(this.props.getLocationTableReducers)) {
         let arrLocation = [];
         let indexTMP = 0;
-        console.log(this.props.getLocationTableReducers);
+        // console.log(this.props.getLocationTableReducers);
         await this.props.getLocationTableReducers[0].map((item) => {
           arrLocation.push({
             id: indexTMP++,
@@ -57,9 +57,9 @@ export default class HomeComponent extends Component {
     }
   }
 
-  getLocation = () => {};
+  getLocation = () => { };
   render() {
-    const {data, tabData, tableData} = this.state;
+    const { data, tabData, tableData } = this.state;
 
     const ItemTable = tableData.map((item, index) => {
       return (
@@ -81,7 +81,7 @@ export default class HomeComponent extends Component {
           NO_OF_GUEST={item.NO_OF_GUEST}
           LOCATION_ID={item.LOCATION_ID}
           offModal={() =>
-            this.setState({visibleInfoGuest: false, opacityView: false})
+            this.setState({ visibleInfoGuest: false, opacityView: false })
           }
         />
       );
@@ -94,13 +94,6 @@ export default class HomeComponent extends Component {
         <SafeAreaView style={styles.header}>
           <Text style={styles.titile}>Trang chủ</Text>
         </SafeAreaView>
-        {/* <TabLocation data={this.state.tabData} locationSelected={this.state.locationSelected} onChangeSelect={(value) => this.setState({ locationSelected: value })} />
-        <View style={{ flexDirection: 'column' }}>
-
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-            <View style={styles.content}>{ItemTable}</View>
-          </ScrollView>
-        </View> */}
 
         <TabLayout
           dataLocation={this.state.tabData}
@@ -115,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: Sizes.s50,
+    height: Sizes.s100,
     backgroundColor: '#4dbd73',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -123,15 +116,15 @@ const styles = StyleSheet.create({
   },
   titile: {
     color: '#fff',
-    fontSize: Sizes.h18,
+    fontSize: Sizes.h24,
     fontWeight: 'bold',
   },
   content: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    margin: Sizes.s10,
-    padding: Sizes.s10,
+    margin: Sizes.s20,
+    padding: Sizes.s20,
     flexWrap: 'wrap',
   },
 });

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 class TableComponent extends Component {
@@ -40,13 +40,23 @@ class TableComponent extends Component {
     }
   };
   onChangeNameGuest = (input) => {
-    this.setState({nameGuest: input});
+    this.setState({ nameGuest: input });
   };
 
   onChangeCountGuest = (input) => {
-    this.setState({countGuest: input});
+    this.setState({ countGuest: input });
   };
 
+  OpenTable = () => {
+    const { nameGuest, countGuest } = this.state;
+    if (nameGuest == '' || countGuest == 0) {
+      alert('Vui lòng nhập thông tin khách hàng');
+    } else {
+      this.props.navigation.navigate('OrderItem');
+      this.openModal();
+    }
+
+  }
   openModal = () => {
     this.setState({
       visibleInfoGuest: !this.state.visibleInfoGuest,
@@ -54,7 +64,7 @@ class TableComponent extends Component {
   };
 
   render() {
-    const {visibleInfoGuest} = this.state;
+    const { visibleInfoGuest } = this.state;
 
     return (
       <View style={styles.table} key={this.props.key}>
@@ -78,7 +88,7 @@ class TableComponent extends Component {
           visible={visibleInfoGuest}
           transparent={true}
           animationType="fade">
-          <View style={{flex: 1, backgroundColor: '#00000050'}}></View>
+          <View style={{ flex: 1, backgroundColor: '#00000050' }}></View>
         </Modal>
 
         <Modal
@@ -96,7 +106,7 @@ class TableComponent extends Component {
               }}>
               <TouchableWithoutFeedback>
                 <View style={styles.CustomModal}>
-                  <Text style={styles.title}>Information Guest</Text>
+                  <Text style={styles.title}>Thông tin khách hàng</Text>
                   <View
                     style={{
                       backgroundColor: 'white',
@@ -113,7 +123,6 @@ class TableComponent extends Component {
                       value={this.state.countGuest}
                       onChangeText={(input) => this.onChangeCountGuest(input)}
                       keyboardType="numeric"
-                      maxLength={10}
                       placeholder="0"
                     />
                   </View>
@@ -134,22 +143,21 @@ class TableComponent extends Component {
                         width: '35%',
                         alignItems: 'center',
                       }}>
-                      <Text style={{color: 'white'}}>Cancel</Text>
+                      <Text style={{ color: 'white' }}>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        this.props.navigation.navigate('OrderItem');
-                        this.openModal();
+                        this.OpenTable()
                       }}
                       style={{
                         padding: Sizes.s10,
-                        backgroundColor: 'blue',
+                        backgroundColor: 'skyblue',
                         borderRadius: Sizes.s30,
                         marginRight: 10,
                         width: '35%',
                         alignItems: 'center',
                       }}>
-                      <Text style={{color: 'white'}}>OK</Text>
+                      <Text style={{ color: 'white' }}>OK</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -189,21 +197,21 @@ const styles = StyleSheet.create({
   },
   CustomModal: {
     backgroundColor: 'white',
-    width: '70%',
+    width: '85%',
     alignSelf: 'center',
-    borderWidth: 0.5,
+    borderRadius: 10
   },
   input: {
     borderColor: 'gray',
     borderRadius: Sizes.s20,
     borderWidth: 0.1,
-    height: 50,
+    height: Sizes.s100,
     paddingHorizontal: 25,
     fontSize: 18,
     margin: 10,
   },
   title: {
-    fontSize: Sizes.s20,
+    fontSize: Sizes.h26,
     fontWeight: 'bold',
     padding: Sizes.s15,
     borderColor: '#EFEFEF',

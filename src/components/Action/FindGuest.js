@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        height: Sizes.s50,
+        height: Sizes.s100,
         backgroundColor: '#4dbd73',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     titile: {
         color: '#fff',
-        fontSize: Sizes.h18,
+        fontSize: Sizes.h24,
         fontWeight: 'bold',
     },
 });

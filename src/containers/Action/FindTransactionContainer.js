@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FindTransaction from '../../components/Action/FindTransaction';
 import { connect } from 'react-redux';
+import { getFindTransaction } from '../../redux/actions/FindTransaction/FindTransactionAction';
 
 class FindTransactionContainer extends Component {
     render() {
@@ -10,12 +11,18 @@ class FindTransactionContainer extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+    return {
+        getFindTransactionReducers: state.getFindTransactionReducers
+    }
+}
 
-})
-
-const mapDispatchToProps = {
-
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetFindTransactionAction: () => {
+            dispatch(getFindTransaction());
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindTransactionContainer);

@@ -38,7 +38,7 @@ class FindGuest extends Component {
     }
     renderItem = ({ item, index }) => (
         <GuestItem
-            key={index}
+            color={index % 2 === 0 ? 'red' : 'green'}
             BALANCE={item.BALANCE}
             ROOM_CODE={item.ROOM_CODE}
             RESV_NAME_ID={item.RESV_NAME_ID}

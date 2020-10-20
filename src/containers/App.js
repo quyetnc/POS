@@ -9,7 +9,6 @@ import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import OrderItemContainer from './OrderItem/OrderItemContainer';
 import AboutContainer from './Setting/AboutContainer'
-import FindTransaction from './Action/FindTransactionContainer';
 import FindGuestContainer from './Action/FindGuestContainer';
 import FindTransactionContainer from './Action/FindTransactionContainer';
 

@@ -1,5 +1,5 @@
-import {Sizes} from '@dungdang/react-native-basic';
-import React, {Component} from 'react';
+import { Sizes } from '@dungdang/react-native-basic';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -15,21 +15,6 @@ import Table from '../Home/TableComponent';
 
 const width = Dimensions.get('window').width;
 
-const menu = [
-  {id: 0, label: 'A'},
-  {id: 1, label: 'B'},
-  // { id: 2, label: 'C' },
-  // { id: 3, label: 'D' },
-  // { id: 4, label: 'E' },
-];
-
-const layout = [
-  {id: 0, contentLayout: <Text>abc</Text>},
-  {id: 1, contentLayout: <Text>XYZ</Text>},
-  // { id: 2, label: 'screen C' },
-  // { id: 3, label: 'screen D' },
-  // { id: 4, label: 'screen E' },
-];
 
 export default class TabLayout extends Component {
   constructor(props) {
@@ -43,16 +28,16 @@ export default class TabLayout extends Component {
   }
   componentDidMount(prevProps) {
     let arrLocationView = [];
-      let arrTableView = [];
-      this.props.dataLocation.map((item, index) => {
-        arrLocationView.push(item);
-        let newArray = this.props.dataTable.filter(function (el) {
-          return el.LOCATION_ID == item.value;
-        });
-        arrTableView.push({id: item.id, data: newArray});
+    let arrTableView = [];
+    this.props.dataLocation.map((item, index) => {
+      arrLocationView.push(item);
+      let newArray = this.props.dataTable.filter(function (el) {
+        return el.LOCATION_ID == item.value;
       });
-      this.setState({menu: arrLocationView});
-      this.setState({layout: arrTableView});
+      arrTableView.push({ id: item.id, data: newArray });
+    });
+    this.setState({ menu: arrLocationView });
+    this.setState({ layout: arrTableView });
   }
 
   componentDidUpdate(prevProps) {
@@ -67,58 +52,30 @@ export default class TabLayout extends Component {
         let newArray = this.props.dataTable.filter(function (el) {
           return el.LOCATION_ID == item.value;
         });
-        arrTableView.push({id: item.id, data: newArray});
+        arrTableView.push({ id: item.id, data: newArray });
       });
-      this.setState({menu: arrLocationView});
-      this.setState({layout: arrTableView});
+      this.setState({ menu: arrLocationView });
+      this.setState({ layout: arrTableView });
     }
   }
-  //   handleViewTable = () => {
-  //     let arrLayoutTemp = [];
-  //     this.state.layout.map((item) => {
-  //       let ItemTable = item.data.map((itemm, index) => {
-  //         return (
-  //           <Table
-  //             navigation={this.props.navigation}
-  //             STT={itemm.STT}
-  //             DINING_TABLE_ID={itemm.DINING_TABLE_ID}
-  //             OUTLET_ID={itemm.OUTLET_ID}
-  //             NAME={itemm.NAME}
-  //             COVERS={itemm.COVERS}
-  //             CHECK_ID={itemm.CHECK_ID}
-  //             USING_CASHIER_ID={itemm.USING_CASHIER_ID}
-  //             WAITER={itemm.WAITER}
-  //             BALANCE={itemm.BALANCE}
-  //             GUEST_NAME={itemm.GUEST_NAME}
-  //             MINUTE_ORDER={itemm.MINUTE_ORDER}
-  //             FIRE={itemm.FIRE}
-  //             PRINT_COUNT={itemm.PRINT_COUNT}
-  //             NO_OF_GUEST={itemm.NO_OF_GUEST}
-  //             LOCATION_ID={itemm.LOCATION_ID}
-  //           />
-  //         );
-  //       });
-  //       arrLayoutTemp.push({id: item.id, contentLayout: ItemTable});
-  //     });
-  //     this.setState({layoutHandled: arrLayoutTemp});
-  //   };
-  renderMenu = ({item, index}) => (
+
+  renderMenu = ({ item, index }) => (
     <TouchableOpacity
       onPress={async () => {
         //scroll tới trang theo index
-        this.flatListScreenRef.scrollToIndex({animated: true, index: item.id});
+        this.flatListScreenRef.scrollToIndex({ animated: true, index: item.id });
       }}
       key={item.id}
       style={{
         alignItems: 'center',
         width: Dimensions.get('window').width * 0.2,
-        paddingVertical: Sizes.s20,
+        paddingVertical: Sizes.s10,
         borderColor: this.state.selectedTab === item.id ? 'red' : '#e2e2e2',
         borderBottomWidth: this.state.selectedTab === item.id ? 2 : 1,
       }}>
       <Text
         style={{
-          fontSize: Sizes.s25,
+          fontSize: Sizes.s20,
           color: this.state.selectedTab === item.id ? 'red' : 'black', //đổi màu chữ khi nhấn
         }}>
         {item.label}
@@ -126,7 +83,7 @@ export default class TabLayout extends Component {
     </TouchableOpacity>
   );
 
-  renderScreens = ({item}) => (
+  renderScreens = ({ item }) => (
     <View
       style={{
         flexDirection: 'column',
@@ -135,12 +92,12 @@ export default class TabLayout extends Component {
         flex: 1,
       }}>
       <FlatList
-        contentContainerStyle={{alignItems:'stretch', flexGrow:1,}}
+        contentContainerStyle={{ alignItems: 'stretch', flexGrow: 1, }}
         data={item.data}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index}
         numColumns={2}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
             <Table
               navigation={this.props.navigation}
@@ -163,13 +120,25 @@ export default class TabLayout extends Component {
           );
         }}
       />
-      
+
     </View>
   );
 
+  onScrollTab = (event) => {
+    this.setState({
+      selectedTab: Math.round(
+        event.nativeEvent.contentOffset.x /
+        Dimensions.get('window').width,
+      ),
+    });
+    this.flatListMenuRef.scrollToIndex({
+      animated: true,
+      index: this.state.selectedTab,
+    });
+  }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {/* <Header title={'TabLayout'} onPressBackButton={() => this.props.navigation.goBack()} /> */}
         {/* //////menu/////// */}
         {/* <Button title="Chekc" onPress={() => console.log(this.state.layout)} /> */}
@@ -184,22 +153,13 @@ export default class TabLayout extends Component {
             scrollEventThrottle={16}
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{flexGrow: 1}}
+            contentContainerStyle={{ flexGrow: 1 }}
           />
         </View>
         {/* //////screen/////// */}
         <FlatList
-          onScroll={async (event) => {
-            await this.setState({
-              selectedTab: Math.round(
-                event.nativeEvent.contentOffset.x /
-                  Dimensions.get('window').width,
-              ),
-            });
-            this.flatListMenuRef.scrollToIndex({
-              animated: true,
-              index: this.state.selectedTab,
-            });
+          onScroll={(event) => {
+            this.onScrollTab(event)
           }}
           data={this.state.layout}
           renderItem={this.renderScreens}
@@ -211,7 +171,7 @@ export default class TabLayout extends Component {
           scrollEventThrottle={16}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
         />
       </View>
     );

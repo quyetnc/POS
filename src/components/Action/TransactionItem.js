@@ -3,12 +3,21 @@ import { Text, View, StyleSheet } from 'react-native'
 import { Sizes } from '@dungdang/react-native-basic'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
-const GuestItem = props => {
+const TransactionItem = props => {
     const currencyFormat = (num) => {
         if (num == 0) {
             return '';
         } else {
             return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        }
+    };
+    const decimalHoursToString = (hoursDecimal) => {
+        const numMinutes = hoursDecimal % 60;
+        const numHours = (hoursDecimal - numMinutes) / 60;
+        if (hoursDecimal == 0) {
+            return '';
+        } else {
+            return numHours + ':' + numMinutes;
         }
     };
     return (
@@ -17,19 +26,21 @@ const GuestItem = props => {
                 <View style={{ width: Sizes.s60, justifyContent: 'center', marginLeft: 10 }}>
                     <Icon name='user-circle' size={Sizes.s35} color={props.color} />
                 </View>
-                <View style={styles.guest}>
-                    <Text style={{ fontWeight: 'bold' }}>{props.FULL_NAME}</Text>
-                    <Text>{props.CONFIRMATION_NO}</Text>
-                    <Text>{props.RESV_STATUS}</Text>
+                <View style={styles.transaction}>
+                    <Text style={{ fontWeight: 'bold' }}>{props.GUEST_NAME}</Text>
+                    <Text>{props.CHECK_NO}</Text>
+                    <Text>{decimalHoursToString(props.MINUTE_ORDER)}</Text>
                 </View>
             </View>
-            <View >
-                <Text style={{ textAlign: 'right' }}>{props.ROOM_CODE}</Text>
-                <Text style={{ textAlign: 'right' }}>{currencyFormat(props.BALANCE)}</Text>
+            <View>
+                <Text style={{ textAlign: 'right' }}>{props.NAME}</Text>
+                <Text style={{ textAlign: 'right' }}>{props.COVERS}</Text>
+                <Text>{currencyFormat(props.TOTAL)}</Text>
             </View>
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -39,8 +50,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey',
         borderBottomWidth: 0.5
     },
-    guest: {
+    transaction: {
 
     }
 });
-export default GuestItem;
+export default TransactionItem;

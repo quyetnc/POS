@@ -6,10 +6,10 @@ import { Sizes } from '@dungdang/react-native-basic'
 import MenuButton from './MenuButton'
 
 const data = [
-    { title: 'ChangeOutlet', icon: 'map-marker', screen: 'Login' },
-    { title: 'FindTransaction', icon: 'search', screen: 'FindTransaction' },
-    { title: 'FindGuest', icon: 'search', screen: 'FindGuest' },
-    { title: 'SyncData', icon: 'sync-alt', screen: 'SyncData' }
+    { title: 'ChangeOutlet', icon: 'map-marker', screen: 'Login', color: 'orange' },
+    { title: 'FindTransaction', icon: 'search', screen: 'FindTransaction', color: 'green' },
+    { title: 'FindGuest', icon: 'search', screen: 'FindGuest', color: 'skyblue' },
+    { title: 'SyncData', icon: 'sync-alt', screen: 'SyncData', color: 'skyblue' }
 ]
 class ActionComponents extends Component {
 
@@ -20,6 +20,7 @@ class ActionComponents extends Component {
                 title={item.title}
                 icon={item.icon}
                 screen={item.screen}
+                color={item.color}
             />
         })
         return (
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: Sizes.s10,
-        paddingVertical: Sizes.s10
+        paddingVertical: Sizes.s10,
+        // flexWrap: 'wrap',
     }
 })
 export default ActionComponents;

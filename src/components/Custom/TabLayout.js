@@ -75,7 +75,7 @@ export default class TabLayout extends Component {
       }}>
       <Text
         style={{
-          fontSize: Sizes.s20,
+          fontSize: Sizes.h24,
           color: this.state.selectedTab === item.id ? 'red' : 'black', //đổi màu chữ khi nhấn
         }}>
         {item.label}
@@ -87,7 +87,7 @@ export default class TabLayout extends Component {
     <View
       style={{
         flexDirection: 'column',
-        //   backgroundColor: 'blue',
+        // backgroundColor: 'blue',
         width: Dimensions.get('window').width,
         flex: 1,
       }}>

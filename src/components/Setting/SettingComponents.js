@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -8,9 +8,9 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-import {Sizes} from '@dungdang/react-native-basic';
+import { Sizes } from '@dungdang/react-native-basic';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {userData} from '../../config/settings';
+import { userData } from '../../config/settings';
 export default class SettingComponent extends Component {
   constructor(props) {
     super(props);
@@ -36,14 +36,14 @@ export default class SettingComponent extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                height: Sizes.s50,
+                height: Sizes.s80,
                 borderBottomWidth: 1,
               }}>
-              <Text style={{marginLeft: Sizes.s10}}>About</Text>
+              <Text style={{ marginLeft: Sizes.s10 }}>About</Text>
               <Icon
-                style={{marginRight: Sizes.s15}}
+                style={{ marginRight: Sizes.s15 }}
                 name="angle-right"
-                size={Sizes.s20}
+                size={Sizes.s25}
               />
             </View>
           </TouchableOpacity>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: Sizes.s50,
+    height: Sizes.s100,
     backgroundColor: '#4dbd73',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   titile: {
     color: '#fff',
-    fontSize: Sizes.h18,
+    fontSize: Sizes.h24,
     fontWeight: 'bold',
   },
   content: {

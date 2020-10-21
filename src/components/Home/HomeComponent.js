@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ScrollView,
   Button,
+  ActivityIndicator,
 } from 'react-native';
 import { Sizes } from '@dungdang/react-native-basic';
 import Table from './TableComponent';
@@ -27,6 +28,7 @@ export default class HomeComponent extends Component {
       opacityView: false,
       visibleInfoGuest: false,
       locationSelected: 0,
+      loading: true,
     };
   }
 
@@ -49,10 +51,13 @@ export default class HomeComponent extends Component {
           });
         });
 
-        this.setState({
-          tabData: arrLocation,
-          tableData: this.props.getLocationTableReducers[1],
-        });
+        this.setState(
+          {
+            tabData: this.props.getLocationTableReducers[0],
+            tableData: this.props.getLocationTableReducers[1],
+          },
+          () => this.setState({loading: false}),
+        );
       }
     }
   }
@@ -94,11 +99,25 @@ export default class HomeComponent extends Component {
         <SafeAreaView style={styles.header}>
           <Text style={styles.titile}>Trang chủ</Text>
         </SafeAreaView>
+        {/* <TabLocation data={this.state.tabData} locationSelected={this.state.locationSelected} onChangeSelect={(value) => this.setState({ locationSelected: value })} />
+        <View style={{ flexDirection: 'column' }}>
 
-        <TabLayout
-          dataLocation={this.state.tabData}
-          dataTable={this.state.tableData}
-        />
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.content}>{ItemTable}</View>
+          </ScrollView>
+        </View> */}
+        {this.state.loading == true ? (
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <ActivityIndicator size="large" color="#00ff00" />
+          </View>
+        ) : (
+          <TabLayout
+            dataLocation={this.state.tabData}
+            dataTable={this.state.tableData}
+            offLoadling={() => this.setState({loading: false})}
+          />
+        )}
       </View>
     );
   }

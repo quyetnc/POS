@@ -6,6 +6,9 @@ import getLocationTableReducers from './LocationTable/LocationTableReducers';
 import getFindGuestReducers from './FindGuest/FindGuestReducers';
 import checkDeviceReducers from './Login/CheckRegisterReducer';
 import getFindTransactionReducers from './FindTransaction/FindTrasactionReducers'
+import detailOrderReducers from './OrderItem/PostGetDetailOrderReducers'
+
+import checkDeviceReducers from './Login/CheckRegisterReducer'
 const allReducers = combineReducers({
   allPropertyReducers,
   outletReducers,
@@ -13,7 +16,8 @@ const allReducers = combineReducers({
   getLocationTableReducers,
   checkDeviceReducers,
   getFindGuestReducers,
-  getFindTransactionReducers
+  getFindTransactionReducersm,
+  detailOrderReducers
 });
 
 export default allReducers;

@@ -18,7 +18,7 @@ class FindTransaction extends Component {
 
     async componentDidMount() {
         await this.props.onGetFindTransactionAction();
-        console.log(this.props)
+     
     }
 
     async componentDidUpdate(prevProps) {
@@ -29,7 +29,7 @@ class FindTransaction extends Component {
                     isLoading: true,
                     refreshing: false
                 })
-                console.log('Components:', this.props.getFindTransactionReducers);
+              
             }
         }
     }
@@ -58,7 +58,7 @@ class FindTransaction extends Component {
 
     render() {
         const { data, isLoading } = this.state;
-        console.log('ComponentRender:', data);
+       
         const showContent = isLoading === true ? (<FlatList
             onRefresh={() => this.handleRefresh()}
             refreshing={this.state.refreshing}

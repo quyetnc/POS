@@ -1,10 +1,11 @@
-import { all } from 'redux-saga/effects';
+import {all} from 'redux-saga/effects';
 
-import { watchAllProperty } from './Login/getAllPropertySaga';
-import { watchGetOutlet } from './Login/getOutletSaga';
-import { watchRegisterDevice } from './Login/postRegisterDeviceSaga';
-import { watchGetLocationTable } from './LocationTable/getLocationTableSaga';
-import { watchCheckDevice } from './Login/postCheckDeviceSaga';
+import {watchAllProperty} from './Login/getAllPropertySaga';
+import {watchGetOutlet} from './Login/getOutletSaga';
+import {watchRegisterDevice} from './Login/postRegisterDeviceSaga';
+import {watchGetLocationTable} from './LocationTable/getLocationTableSaga';
+import {watchCheckDevice} from './Login/postCheckDeviceSaga';
+import {watchGetDetailOrder} from './OrderItem/postGetDetailOrderSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     watchRegisterDevice(),
     watchGetLocationTable(),
     watchCheckDevice(),
+    watchGetDetailOrder(),
   ]);
 }

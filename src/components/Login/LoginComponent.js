@@ -164,7 +164,7 @@ export default class LoginComponent extends React.Component {
           },
         },
         () => {
-          box = [this.state.deviceBodyCheck, this.state.deviceBodyFull];
+          let box = [this.state.deviceBodyCheck, this.state.deviceBodyFull];
           this.props.onPostCheckDeviceAction(box);
         },
       );

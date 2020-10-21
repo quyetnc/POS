@@ -46,20 +46,23 @@ class TableComponent extends Component {
   onChangeCountGuest = (input) => {
     this.setState({ countGuest: input });
   };
-
-  OpenTable = () => {
-    const { nameGuest, countGuest } = this.state;
-    if (nameGuest == '' || countGuest == 0) {
-      alert('Vui lòng nhập thông tin khách hàng');
-    } else {
-      this.props.navigation.navigate('OrderItem');
-      this.openModal();
-    }
-
-  }
+  showInfoGuest = () => {
+    console.log('ITEM CHECK: ', this.props.item);
+    this.props.item.CHECK_ID !== 0
+      ? this.props.navigation.navigate('OrderItemScreen', {
+          checkID: this.props.item.CHECK_ID,
+          guestInfo: this.props.item,
+        })
+      : this.openModal();
+  };
   openModal = () => {
     this.setState({
-      visibleInfoGuest: !this.state.visibleInfoGuest,
+      visibleInfoGuest: true,
+    });
+  };
+  hideModal = () => {
+    this.setState({
+      visibleInfoGuest: false,
     });
   };
 
@@ -70,7 +73,7 @@ class TableComponent extends Component {
       <View style={styles.table} key={this.props.key}>
         <TouchableOpacity
           onPress={() => {
-            this.openModal();
+            this.showInfoGuest();
           }}>
           <View style={styles.headerTable}>
             <Text>{this.props.NAME}</Text>
@@ -134,7 +137,7 @@ class TableComponent extends Component {
                       marginTop: Sizes.s35,
                     }}>
                     <TouchableOpacity
-                      onPress={this.openModal}
+                      onPress={()=>this.hideModal()}
                       style={{
                         padding: Sizes.s10,
                         backgroundColor: 'orange',
@@ -147,7 +150,8 @@ class TableComponent extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        this.OpenTable()
+                        // this.props.navigation.navigate('OrderItem');
+                        this.hideModal();
                       }}
                       style={{
                         padding: Sizes.s10,

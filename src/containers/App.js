@@ -12,6 +12,8 @@ import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import OrderItemContainer from './OrderItem/OrderItemContainer';
 import AboutContainer from './Setting/AboutContainer';
+import FindGuestContainer from './Action/FindGuestContainer';
+import FindTransactionContainer from './Action/FindTransactionContainer';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -52,7 +54,7 @@ const MainTabScreen = () => {
 
       <Tab.Screen
         name="Action"
-        component={ActionContainer}
+        component={actionNavigation}
         options={{
           tabBarLabel: 'Action',
           tabBarIcon: ({color}) => (
@@ -85,6 +87,19 @@ const homeNavigation = (props) => {
         component={OrderItemContainer}
         options={{}}
       />
+    </Stack.Navigator>
+  );
+};
+
+
+const actionNavigation = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="Action">
+      <Stack.Screen name="Action" component={ActionContainer} options={{}} />
+      <Stack.Screen name="FindTransaction" component={FindTransactionContainer} options={{}} />
+      <Stack.Screen name="FindGuest" component={FindGuestContainer} options={{}} />
     </Stack.Navigator>
   );
 };

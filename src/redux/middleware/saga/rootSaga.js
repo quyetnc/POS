@@ -7,11 +7,6 @@ import { watchGetLocationTable } from './LocationTable/getLocationTableSaga';
 import { watchCheckDevice } from './Login/postCheckDeviceSaga';
 import { watchGetFindGuest } from './FindGuest/FindGuestSaga';
 import { watchGetFindTransaction } from './FindTransaction/FindTransactionSaga';
-import {watchAllProperty} from './Login/getAllPropertySaga';
-import {watchGetOutlet} from './Login/getOutletSaga';
-import {watchRegisterDevice} from './Login/postRegisterDeviceSaga';
-import {watchGetLocationTable} from './LocationTable/getLocationTableSaga';
-import {watchCheckDevice} from './Login/postCheckDeviceSaga';
 import {watchGetDetailOrder} from './OrderItem/postGetDetailOrderSaga';
 
 export default function* rootSaga() {

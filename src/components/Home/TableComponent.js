@@ -150,7 +150,7 @@ class TableComponent extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        this.props.navigation.navigate('OrderItem');
+                        // this.props.navigation.navigate('OrderItem');
                         this.hideModal();
                       }}
                       style={{

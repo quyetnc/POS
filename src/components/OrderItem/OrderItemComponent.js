@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,8 +7,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {Sizes} from '@dungdang/react-native-basic';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Sizes } from '@dungdang/react-native-basic';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MenuOrderContainer from '../../containers/OrderItem/MenuOrderContainer';
 import DetailOrderContainer from '../../containers/OrderItem/DetailOrderContainer';
@@ -33,13 +33,13 @@ class OrderItemComponent extends Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.detailOrderReducers !== this.props.detailOrderReducers) {
-      this.setState({detailsItem: this.props.detailOrderReducers}, () =>
+      this.setState({ detailsItem: this.props.detailOrderReducers }, () =>
         this.loadDone(),
       );
     }
   }
   loadDone = () => {
-    this.setState({showTab: true});
+    this.setState({ showTab: true });
   };
   getOrderItem = () => {
     // CheckDetailService.getOrderedItemCheck(
@@ -61,7 +61,7 @@ class OrderItemComponent extends Component {
             <Icon
               name="arrow-left"
               size={20}
-              style={{color: 'white', marginLeft: Sizes.s15}}
+              style={{ color: 'white', marginLeft: Sizes.s15 }}
             />
           </TouchableOpacity>
 
@@ -69,7 +69,7 @@ class OrderItemComponent extends Component {
           <Icon
             name="ellipsis-v"
             size={20}
-            style={{color: 'white', marginRight: Sizes.s15}}
+            style={{ color: 'white', marginRight: Sizes.s15 }}
           />
         </SafeAreaView>
         {this.state.showTab ? (
@@ -84,21 +84,21 @@ class OrderItemComponent extends Component {
               options={{
                 title: 'Captain Order',
               }}
-              initialParams={{guestInfo: this.props.route.params.guestInfo}}
+              initialParams={{ guestInfo: this.props.route.params.guestInfo }}
             />
             <Tab.Screen
               name="DetailOrderScreen"
               component={DetailOrderContainer}
-              options={{title: 'Detail Order'}}
-              initialParams={{detailsItem: this.state.detailsItem}}
+              options={{ title: 'Detail Order' }}
+              initialParams={{ detailsItem: this.state.detailsItem }}
             />
           </Tab.Navigator>
         ) : (
-          <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
+            <View
+              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
       </View>
     );
   }
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: Sizes.s50,
+    height: Sizes.s100,
     backgroundColor: '#4dbd73',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   titile: {
     color: '#fff',
-    fontSize: Sizes.h18,
+    fontSize: Sizes.h24,
     fontWeight: 'bold',
   },
 });

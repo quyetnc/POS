@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Image, View, Text} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import { Button, Image, View, Text } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import LoginContainer from './Login/LoginContainer';
 import demo from '../components/Custom/demo';
 import demo2 from '../components/Custom/demo2';
@@ -10,6 +10,7 @@ import HomeContainer from './Home/HomeContainer';
 import ActionContainer from './Action/ActionContainer';
 import SettingContainer from './Setting/SettingContainer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import OrderItemContainer from './OrderItem/OrderItemContainer';
 import AboutContainer from './Setting/AboutContainer';
 import FindGuestContainer from './Action/FindGuestContainer';
@@ -27,6 +28,11 @@ const MainStackScreen = () => (
       initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginContainer} options={{}} />
       <Stack.Screen name="Home" component={MainTabScreen} options={{}} />
+      <Stack.Screen name="FindTransaction" component={FindTransactionContainer} options={{}} />
+      <Stack.Screen name="FindGuest" component={FindGuestContainer} options={{}} />
+      <Stack.Screen name="About" component={AboutContainer} options={{}} />
+      <Stack.Screen name="OrderItemScreen" component={OrderItemContainer} options={{}}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );
@@ -46,7 +52,7 @@ const MainTabScreen = () => {
         component={homeNavigation}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
           ),
         }}
@@ -57,7 +63,7 @@ const MainTabScreen = () => {
         component={actionNavigation}
         options={{
           tabBarLabel: 'Action',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="vector-combine" color={color} size={26} />
           ),
         }}
@@ -67,8 +73,8 @@ const MainTabScreen = () => {
         component={settingNavigation}
         options={{
           tabBarLabel: 'Setting',
-          tabBarIcon: ({color}) => (
-            <Icon name="vector-combine" color={color} size={26} />
+          tabBarIcon: ({ color }) => (
+            <Icon2 name="cog" color={color} size={26} />
           ),
         }}
       />
@@ -79,14 +85,10 @@ const MainTabScreen = () => {
 const homeNavigation = (props) => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeContainer} options={{}} />
-      <Stack.Screen
-        name="OrderItemScreen"
-        component={OrderItemContainer}
-        options={{}}
-      />
+
     </Stack.Navigator>
   );
 };
@@ -95,11 +97,10 @@ const homeNavigation = (props) => {
 const actionNavigation = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Action">
       <Stack.Screen name="Action" component={ActionContainer} options={{}} />
-      <Stack.Screen name="FindTransaction" component={FindTransactionContainer} options={{}} />
-      <Stack.Screen name="FindGuest" component={FindGuestContainer} options={{}} />
+
     </Stack.Navigator>
   );
 };
@@ -107,10 +108,10 @@ const actionNavigation = () => {
 const settingNavigation = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Setting">
       <Stack.Screen name="Setting" component={SettingContainer} options={{}} />
-      <Stack.Screen name="About" component={AboutContainer} options={{}} />
+
     </Stack.Navigator>
   );
 };

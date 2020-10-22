@@ -50,9 +50,9 @@ class TableComponent extends Component {
     console.log('ITEM CHECK: ', this.props.item);
     this.props.item.CHECK_ID !== 0
       ? this.props.navigation.navigate('OrderItemScreen', {
-          checkID: this.props.item.CHECK_ID,
-          guestInfo: this.props.item,
-        })
+        checkID: this.props.item.CHECK_ID,
+        guestInfo: this.props.item,
+      })
       : this.openModal();
   };
   openModal = () => {
@@ -65,7 +65,18 @@ class TableComponent extends Component {
       visibleInfoGuest: false,
     });
   };
+  openTable = () => {
+    const { nameGuest, countGuest } = this.state;
+    if (nameGuest == '' || countGuest == 0) {
+      return alert('vui lòng nhập thông tin!');
+    }
+    this.props.navigation.navigate('OrderItemScreen', {
+      checkID: this.props.item.CHECK_ID,
+      guestInfo: this.props.item,
+    })
+    this.hideModal();
 
+  }
   render() {
     const { visibleInfoGuest } = this.state;
 
@@ -100,7 +111,7 @@ class TableComponent extends Component {
           animationType="fade">
           <TouchableWithoutFeedback
             onPress={() => {
-              this.props.offModal();
+              this.hideModal();
             }}>
             <View
               style={{
@@ -137,7 +148,7 @@ class TableComponent extends Component {
                       marginTop: Sizes.s35,
                     }}>
                     <TouchableOpacity
-                      onPress={()=>this.hideModal()}
+                      onPress={() => this.hideModal()}
                       style={{
                         padding: Sizes.s10,
                         backgroundColor: 'orange',
@@ -150,8 +161,7 @@ class TableComponent extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        // this.props.navigation.navigate('OrderItem');
-                        this.hideModal();
+                        this.openTable()
                       }}
                       style={{
                         padding: Sizes.s10,

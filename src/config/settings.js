@@ -17,30 +17,7 @@ export const userData = {
 
 
 
-// export const storeIsLogin = async (value) => {
-//   try {
-//     await AsyncStorage.setItem('@IsLogin', value);
-//     console.log('ok add');
-//   } catch (e) {
-//     // saving error
-//   }
-// };
-// export const getIsLogin = async () => {
-//   try {
-//     console.log('SHow');
-//     const value = await AsyncStorage.getItem('@IsLogin');
-//     if (value !== null) {
-//       return value
-//     } else return 'false'
-//   } catch (e) {
-//     return 'error';
-//   }
-// };
-// export const removeIsLogin = async () => {
-//   try {
-//     const value = await AsyncStorage.removeItem('@IsLogin');
-//     console.log('remove islogin done');
-//   } catch (e) {
-//     // error reading value
-//   }
-// };
+export const dataMenu = {
+  isSaveMenu: false,
+  CATEGORY_MENU: null
+}

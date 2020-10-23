@@ -1,15 +1,26 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import MenuOrderComponent from '../../components/OrderItem/CaptainOrderComponent';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import CaptainOrderComponent from '../../components/OrderItem/CaptainOrderComponent';
+import { postGetCategoryMenuAction } from '../../redux/actions/OrderItem/PostGetCategoryMenuAction'
 export class MenuOrderContainer extends Component {
   render() {
-    return <MenuOrderComponent {...this.props} />;
+    return <CaptainOrderComponent {...this.props} />;
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  // console.log(state.categoryMenuReducers)
+  return {
+    categoryMenuReducers: state.categoryMenuReducers
+  }
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetCategoryMenuAction: () => {
+      dispatch(postGetCategoryMenuAction());
+    }
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuOrderContainer);

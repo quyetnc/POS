@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage';
 export const API_URL = 'http://10.14.138.22/PosApiV2/api/';
 
 export const userData = {
@@ -13,7 +12,7 @@ export const userData = {
   TOKEN: null,
   ORDER_TYPE_ID: 0,
   OUTLET_ID: null,
-  DEVICE_CODE : null
+  DEVICE_CODE: null
 };
 
 

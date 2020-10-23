@@ -17,8 +17,8 @@ class TableComponent extends Component {
     this.state = {
       visibleInfoGuest: false,
       isModalGuest: false,
-      nameGuest: '',
-      countGuest: 0,
+      nameGuest: 'Khách lẻ',
+      countGuest: '2',
     };
   }
 

@@ -1,14 +1,22 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 export default class DetailOrderComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {total: 0};
+    this.state = { total: 0 };
   }
   componentDidMount() {
     this.handleData();
   }
+  currencyFormat = (num) => {
+    if (num == 0) {
+      return '';
+    } else {
+      return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    }
+  };
+
   handleData = () => {
     let data = this.props.route.params.detailsItem.map((item) => item.PRICE);
     let total = data.reduce((acc, val) => acc + val, 0);
@@ -17,7 +25,7 @@ export default class DetailOrderComponent extends Component {
     });
   };
 
-  renderItem = ({item, index}) => {
+  renderItem = ({ item, index }) => {
     return (
       <View
         style={{
@@ -32,15 +40,15 @@ export default class DetailOrderComponent extends Component {
         <Text
           style={[
             styles.itemCell,
-            {color: `${item.DETAIL_TYPE === 'CONDIMENT' ? 'red' : '#000'}`},
+            { color: `${item.DETAIL_TYPE === 'CONDIMENT' ? 'red' : '#000'}` },
           ]}>
           {item.NAME}
         </Text>
-        <Text style={[styles.itemCell, {textAlign: 'right'}]}>
+        <Text style={[styles.itemCell, { textAlign: 'right' }]}>
           {item.QUANTITY}
         </Text>
-        <Text style={[styles.itemCell, {textAlign: 'right'}]}>
-          {item.PRICE}
+        <Text style={[styles.itemCell, { textAlign: 'right' }]}>
+          {this.currencyFormat(item.PRICE)}
         </Text>
       </View>
     );
@@ -54,7 +62,7 @@ export default class DetailOrderComponent extends Component {
           keyExtractor={(item, index) => index.toString()}
         />
         <View style={styles.totalBottom}>
-          <Text style={styles.total}>{this.state.total}</Text>
+          <Text style={styles.total}>{this.currencyFormat(this.state.total)}</Text>
         </View>
       </View>
     );

@@ -31,8 +31,8 @@ const MainStackScreen = () => (
       <Stack.Screen name="FindTransaction" component={FindTransactionContainer} options={{}} />
       <Stack.Screen name="FindGuest" component={FindGuestContainer} options={{}} />
       <Stack.Screen name="About" component={AboutContainer} options={{}} />
-      <Stack.Screen name="OrderItemScreen" component={OrderItemContainer} options={{}}
-      />
+      <Stack.Screen name="OrderItemScreen" component={OrderItemContainer} options={{}} />
+
     </Stack.Navigator>
   </NavigationContainer>
 );

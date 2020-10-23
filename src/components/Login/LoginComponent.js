@@ -30,7 +30,7 @@ export default class LoginComponent extends React.Component {
       outletSelection: null,
       valueProperty: [],
       valueOutlet: [],
-      passCode: '',
+      passCode: '7',
       visibleRegister: false,
       opacityView: false,
       propertyShow: false,
@@ -268,6 +268,7 @@ export default class LoginComponent extends React.Component {
                 value={this.state.passCode}
                 keyboardType='numeric'
                 onChangeText={(text) => this.setState({ passCode: text })}
+
               />
             </View>
 
@@ -295,7 +296,7 @@ export default class LoginComponent extends React.Component {
                   borderRadius: Sizes.s25,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  backgroundColor: 'aqua',
+                  backgroundColor: 'blue',
                   padding: Sizes.s15,
                 }}
                 disabled={this.state.passCode == '' ? true : false}

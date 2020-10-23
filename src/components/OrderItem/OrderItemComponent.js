@@ -41,6 +41,7 @@ class OrderItemComponent extends Component {
   loadDone = () => {
     this.setState({ showTab: true });
   };
+
   getOrderItem = () => {
     // CheckDetailService.getOrderedItemCheck(
     //   this.props.route.params.checkID,

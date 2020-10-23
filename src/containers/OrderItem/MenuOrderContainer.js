@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import MenuOrderComponent from '../../components/OrderItem/MenuOrderComponent';
+import MenuOrderComponent from '../../components/OrderItem/CaptainOrderComponent';
 
 export class MenuOrderContainer extends Component {
   render() {

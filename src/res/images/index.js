@@ -62,7 +62,6 @@ const images = {
   ic_fpt_telecom: require("./ic_fpt_telecom.png"),
   ic_tech_insight: require("./ic_tech_insight.png"),
   ic_fpt: require("./ic_fpt.png"),
-  ic_fpt_synnex: require("./ic_fpt_synnex.png"),
   swipe: require("./swipe.png"),
   swipe2: require("./swipe2.png"),
   swipe3: require("./swipe3.png"),

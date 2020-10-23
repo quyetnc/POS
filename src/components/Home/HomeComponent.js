@@ -16,7 +16,6 @@ import {
   arrayIsEmpty,
   stringIsEmpty,
 } from '@dungdang/react-native-basic/src/Functions';
-import AsyncStorage from '@react-native-community/async-storage';
 import { userData } from '../../config/settings';
 import TabLayout from '../Custom/TabLayout';
 export default class HomeComponent extends Component {

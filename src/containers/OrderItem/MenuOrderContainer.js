@@ -10,6 +10,7 @@ export class MenuOrderContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+   
   return {
     categoryMenuReducers: state.categoryMenuReducers,
     fullMenuReducers: state.fullMenuReducers,

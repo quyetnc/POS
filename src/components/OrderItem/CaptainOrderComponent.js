@@ -28,7 +28,8 @@ class CaptainOrderComponent extends Component {
       categoryMenu: [],
       visibleModal: false,
       showMenuItem: false,
-      fullMenu :[]
+      fullMenu: [],
+      menuCategoryChoose: 1267,
     };
   }
   currencyFormat = (num) => {
@@ -40,6 +41,7 @@ class CaptainOrderComponent extends Component {
   };
 
   async componentDidMount() {
+    this.props.onPostGetFullMenuAction();
     dataMenu.isSaveMenu == true
       ? this.setState({menuItem: dataMenu.CATEGORY_MENU})
       : this.props.onGetCategoryMenuAction();
@@ -53,6 +55,7 @@ class CaptainOrderComponent extends Component {
       }
     }
     if (preProps.fullMenuReducers !== this.props.fullMenuReducers) {
+      // console.log(this.props.fullMenuReducers)
       if (!objectIsNull(this.props.fullMenuReducers)) {
         this.setState({fullMenu: this.props.fullMenuReducers}, () => {
           dataMenu.FULL_MENU = this.props.fullMenuReducers;
@@ -69,6 +72,7 @@ class CaptainOrderComponent extends Component {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 15,
+
         borderBottomWidth: 0.5,
         borderBottomColor: 'gray',
       }}>
@@ -79,6 +83,12 @@ class CaptainOrderComponent extends Component {
       </Text>
     </View>;
   };
+
+  renderItemMenu = ({item, index}) => (
+    <View style={{height: Sizes.s150, flex :1/3, backgroundColor: 'blue', margin : Sizes.s5}}>
+      <Text style = {{fontSize:Sizes.s20}}>{item.NAME2}</Text>
+    </View>
+  );
 
   showMenu = () => {
     this.setState({visibleModal: true});
@@ -95,9 +105,17 @@ class CaptainOrderComponent extends Component {
           <ScrollView contentContainerStyle={{flexGrow: 1}}>
             {this.state.categoryMenu.map((item, index) => {
               return (
-                <Text key={index} style={{padding: 10}}>
-                  {item.NAME}
-                </Text>
+                <TouchableOpacity
+                  key={index}
+                  style={{padding: 10}}
+                  onPress={() =>
+                    this.setState({menuCategoryChoose: item.MENU_ID}, () => {
+                      this.setState({showMenuItem: false});
+                      console.log(this.state.menuCategoryChoose);
+                    })
+                  }>
+                  <Text>{item.NAME}</Text>
+                </TouchableOpacity>
               );
             })}
           </ScrollView>
@@ -149,17 +167,25 @@ class CaptainOrderComponent extends Component {
               </View>
             </SafeAreaView>
 
-            <View style={{flex: 1}}>{Menu}</View>
+            {Menu}
 
+            <FlatList
+              style={{flex: 1, borderWidth: 1, backgroundColor: 'white'}}
+              contentContainerStyle= {{justifyContent:'center'}}
+              data={this.state.fullMenu.filter(
+                (item) => item.MENU_ID == this.state.menuCategoryChoose,
+              )}
+              renderItem={this.renderItemMenu}
+              keyExtractor={(item, index) => index.toString()}
+              numColumns={3}
+            />
+          
             <TouchableOpacity style={styles.floatingBtnCart}>
               <Icon name="shopping-cart" size={20} color="white" />
             </TouchableOpacity>
           </View>
         </Modal>
-        <Button
-          title="OK"
-          onPress={() => this.props.onPostGetFullMenuAction()}
-        />
+       
         <TouchableOpacity style={styles.floatingBtn} onPress={this.showMenu}>
           <Icon name="plus" size={20} color="white" />
         </TouchableOpacity>
@@ -225,11 +251,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
     right: Sizes.s15,
-    top: Sizes.s10,
+    top: Sizes.s100,
     width: Dimensions.get('window').width / 2,
     height: Dimensions.get('window').height * 0.7,
     borderRadius: 2,
     elevation: 10,
+    zIndex: 2,
   },
 });
 

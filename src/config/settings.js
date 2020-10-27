@@ -19,5 +19,6 @@ export const userData = {
 
 export const dataMenu = {
   isSaveMenu: false,
-  CATEGORY_MENU: null
+  CATEGORY_MENU: null,
+  FULL_MENU : null
 }

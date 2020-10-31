@@ -85,8 +85,14 @@ class CaptainOrderComponent extends Component {
   };
 
   renderItemMenu = ({item, index}) => (
-    <View style={{height: Sizes.s150, flex :1/3, backgroundColor: 'blue', margin : Sizes.s5}}>
-      <Text style = {{fontSize:Sizes.s20}}>{item.NAME2}</Text>
+    <View
+      style={{
+        height: Sizes.s150,
+        flex: 1 / 3,
+        backgroundColor: 'blue',
+        margin: Sizes.s5,
+      }}>
+      <Text style={{fontSize: Sizes.s20}}>{item.NAME2}</Text>
     </View>
   );
 
@@ -171,7 +177,7 @@ class CaptainOrderComponent extends Component {
 
             <FlatList
               style={{flex: 1, borderWidth: 1, backgroundColor: 'white'}}
-              contentContainerStyle= {{justifyContent:'center'}}
+              contentContainerStyle={{justifyContent: 'center'}}
               data={this.state.fullMenu.filter(
                 (item) => item.MENU_ID == this.state.menuCategoryChoose,
               )}
@@ -179,20 +185,24 @@ class CaptainOrderComponent extends Component {
               keyExtractor={(item, index) => index.toString()}
               numColumns={3}
             />
-          
+            <Button
+              title="Check"
+              onPress={() => console.log(this.state.fullMenu)}
+            />
             <TouchableOpacity style={styles.floatingBtnCart}>
               <Icon name="shopping-cart" size={20} color="white" />
             </TouchableOpacity>
           </View>
         </Modal>
-       
+
         <TouchableOpacity style={styles.floatingBtn} onPress={this.showMenu}>
           <Icon name="plus" size={20} color="white" />
         </TouchableOpacity>
-
-        <View style={styles.totalBottom}>
-          <Text style={styles.total}>Save</Text>
-        </View>
+        <TouchableOpacity onPress={() => this.props.onPostInsertOrderAction()}>
+          <View style={styles.totalBottom}>
+            <Text style={styles.total}>Save</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }

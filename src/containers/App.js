@@ -3,6 +3,7 @@ import {Button, Image, View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import LoginContainer from './Login/LoginContainer';
 import demo from '../components/Custom/demo';
 import demo2 from '../components/Custom/demo2';
@@ -19,21 +20,32 @@ import FillCodeContainer from './Login/FillCodeContainer';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
-
+const Drawer = createDrawerNavigator();
+function CustomDrawerContent({ navigation }) {
+  return (
+    <Button
+      title="Go somewhere"
+      onPress={() => {
+        // Navigate using the `navigation` prop that you received
+        navigation.navigate('Action');
+      }}
+    />
+  );
+}
 const MainStackScreen = () => (
   <NavigationContainer>
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="FillCode">
+      initialRouteName="Login">
       <Stack.Screen
         name="FillCode"
         component={FillCodeContainer}
         options={{}}
       />
       <Stack.Screen name="Login" component={LoginContainer} options={{}} />
-      <Stack.Screen name="Home" component={MainTabScreen} options={{}} />
+      <Stack.Screen name="Home" component={MainDraverScreen} options={{}} />
       <Stack.Screen
         name="FindTransaction"
         component={FindTransactionContainer}
@@ -54,6 +66,14 @@ const MainStackScreen = () => (
   </NavigationContainer>
 );
 
+const MainDraverScreen = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Homee" drawerContent={(props) => <CustomDrawerContent {...props} />}>
+    <Drawer.Screen name="Homee" component={homeNavigation} />
+    <Drawer.Screen name="Action" component={actionNavigation} />
+  </Drawer.Navigator>
+  )
+}
 const MainTabScreen = () => {
   return (
     <Tab.Navigator

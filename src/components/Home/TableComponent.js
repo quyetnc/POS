@@ -47,9 +47,11 @@ class TableComponent extends Component {
     this.setState({ countGuest: input });
   };
   showInfoGuest = () => {
+    console.log('Checkid',this.props.item.CHECK_ID);
     // console.log('ITEM CHECK: ', this.props.item);
     this.props.item.CHECK_ID !== 0
       ? this.props.navigation.navigate('OrderItemScreen', {
+       
         checkID: this.props.item.CHECK_ID,
         guestInfo: this.props.item,
       })

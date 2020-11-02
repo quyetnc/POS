@@ -17,6 +17,7 @@ import AboutContainer from './Setting/AboutContainer';
 import FindGuestContainer from './Action/FindGuestContainer';
 import FindTransactionContainer from './Action/FindTransactionContainer';
 import FillCodeContainer from './Login/FillCodeContainer';
+import ConfirmApiContainer from './Login/ConfirmApiContainer';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -38,12 +39,18 @@ const MainStackScreen = () => (
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Login">
+      initialRouteName="FillCode">
       <Stack.Screen
         name="FillCode"
         component={FillCodeContainer}
         options={{}}
       />
+ <Stack.Screen
+        name="ConfirmApi"
+        component={ConfirmApiContainer}
+        options={{}}
+      />
+
       <Stack.Screen name="Login" component={LoginContainer} options={{}} />
       <Stack.Screen name="Home" component={MainDraverScreen} options={{}} />
       <Stack.Screen

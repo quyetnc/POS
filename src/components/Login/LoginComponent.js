@@ -11,13 +11,14 @@ import {
   TouchableOpacity,
   ActivityIndicatorBase,
 } from 'react-native';
-import { Sizes } from '@dungdang/react-native-basic';
+import {Sizes} from '@dungdang/react-native-basic';
 import images from '../../res/images/index';
 import Picker from '../Custom/Picker';
-import { colors } from '../../res/values/styles/color';
+import {colors} from '../../res/values/styles/color';
 import RegisterDeviceModal from './RegisterDeviceModal';
 import ViewOpaticy from '../Custom/ViewOpaticy';
 import DeviceInfo from 'react-native-device-info';
+import ProcessLoginComponent from '../Custom/ProcessLoginComponent';
 
 export default class LoginComponent extends React.Component {
   _isMounted = false;
@@ -36,7 +37,7 @@ export default class LoginComponent extends React.Component {
       propertyShow: false,
       outletShow: false,
       deviceBodyFull: [],
-      isLoading: false
+      isLoading: false,
     };
   }
   async componentDidMount() {
@@ -88,8 +89,8 @@ export default class LoginComponent extends React.Component {
 
         setTimeout(() => {
           this.setState({
-            isLoading: false
-          })
+            isLoading: false,
+          });
           this.props.navigation.navigate('Home');
         }, 1000);
       }
@@ -108,8 +109,8 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({ valueProperty: arrProperty }, () => {
-      this.setState({ propertySelection: arrProperty[0] }, () => { });
+    this.setState({valueProperty: arrProperty}, () => {
+      this.setState({propertySelection: arrProperty[0]}, () => {});
       this.getOutlet(this.state.valueProperty[0].value);
     });
   };
@@ -129,8 +130,8 @@ export default class LoginComponent extends React.Component {
       });
     });
 
-    this.setState({ valueOutlet: arrOutlet }, () =>
-      this.setState({ outletSelection: arrOutlet[0] }),
+    this.setState({valueOutlet: arrOutlet}, () =>
+      this.setState({outletSelection: arrOutlet[0]}),
     );
   };
   postRegisterDevice = () => {
@@ -179,15 +180,17 @@ export default class LoginComponent extends React.Component {
   onLogin = () => {
     this.postCheckDevice();
     this.setState({
-      isLoading: true
-    })
+      isLoading: true,
+    });
   };
   render() {
-    const { isLoading } = this.state;
-    const Loading = isLoading === true ? <ActivityIndicatorBase size="large" color="#00ff00" /> : null
+    const {isLoading} = this.state;
+    const Loading =
+      isLoading === true ? (
+        <ActivityIndicatorBase size="large" color="#00ff00" />
+      ) : null;
     return (
       <SafeAreaView style={styles.container}>
-
         {this.state.opacityView === true ? <ViewOpaticy /> : <View />}
 
         <RegisterDeviceModal
@@ -195,34 +198,58 @@ export default class LoginComponent extends React.Component {
           valueProperty={this.state.valueProperty}
           valueOutlet={this.state.valueOutlet}
           setPropertySelection={(item) =>
-            this.setState({ propertySelection: item })
+            this.setState({propertySelection: item})
           }
-          setOutletSelection={(item) => this.setState({ outletSelection: item })}
+          setOutletSelection={(item) => this.setState({outletSelection: item})}
           propertySelection={this.state.propertySelection}
           outletSelection={this.state.outletSelection}
           offModal={() =>
-            this.setState({ visibleRegister: false, opacityView: false })
+            this.setState({visibleRegister: false, opacityView: false})
           }
           postRegisterDevicee={() => this.postRegisterDevice()}
         />
         <ScrollView
-          contentContainerStyle={[{ justifyContent: 'center', flexGrow: 1 }]}>
-
-          <View style={{ alignItems: 'center' }}>
-
+          contentContainerStyle={[
+            {flex: 1, justifyContent: 'center', flexGrow: 1},
+          ]}>
+          <ProcessLoginComponent Step={3} />
+          <View
+            style={{
+              flex: 0.6,
+              height: '100%',
+              width: '100%',
+              justifyContent: 'center',
+            }}>
             <Image
               resizeMode="contain"
-              source={images.ic_fpt_is}
-              style={{ width: '30%' }}
+              source={images.ic_main}
+              style={{
+                width: '25%',
+                alignSelf: 'center',
+              }}
             />
           </View>
-          <View style={{ marginTop: Sizes.s40 }}>
-            <Picker
+          <View style={{marginTop: Sizes.s40}}>
+            <View
               style={{
                 width: '80%',
                 alignSelf: 'center',
                 borderRadius: Sizes.s35,
                 borderColor: colors.black,
+              }}>
+              <Text style={{fontSize: Sizes.h30, fontWeight: 'bold'}}>
+                Khách sạn
+              </Text>
+            </View>
+
+            <Picker
+              style={{
+                width: '80%',
+                alignSelf: 'center',
+                backgroundColor: 'white',
+                borderRadius: Sizes.s15,
+                elevation: Sizes.s15,
+                // borderColor: colors.black,
               }}
               data={this.state.valueProperty} //lable
               noDataMessage="Dữ Liệu Trống"
@@ -230,48 +257,53 @@ export default class LoginComponent extends React.Component {
               title="Chọn Property"
               value={this.state.propertySelection}
               onChangeItem={(item) =>
-                this.setState({ propertySelection: item }, () =>
+                this.setState({propertySelection: item}, () =>
                   this.getOutlet(item.value),
                 )
               }
             />
-            <Picker
+            <View
               style={{
                 width: '80%',
                 alignSelf: 'center',
                 borderRadius: Sizes.s35,
                 borderColor: colors.black,
+              }}>
+              <Text style={{fontSize: Sizes.h30, fontWeight: 'bold'}}>
+                Nhà hàng
+              </Text>
+            </View>
+
+            <Picker
+              style={{
+                width: '80%',
+                alignSelf: 'center',
+                backgroundColor: 'white',
+                borderRadius: Sizes.s15,
+                elevation: Sizes.s15,
+                // borderColor: colors.black,
               }}
               data={this.state.valueOutlet} //lable
               noDataMessage="Dữ Liệu Trống"
               placeholder="Chọn Outlet"
               title="Chọn Outlet"
               value={this.state.outletSelection}
-              onChangeItem={(item) => this.setState({ outletSelection: item })}
+              onChangeItem={(item) => this.setState({outletSelection: item})}
             />
 
-            <View
-              style={{
-                width: '80%',
-                alignSelf: 'center',
-                marginTop: Sizes.s5,
-              }}>
+            <View style={[styles.sizeContentItem]}>
+              <Text style={{color: '#8C8C8C'}}>Nhập Passcode</Text>
+
               <TextInput
                 style={{
-                  borderWidth: 1,
-                  borderRadius: Sizes.s35,
-                  borderColor: colors.black,
-                  paddingHorizontal: Sizes.s25,
-                  paddingVertical: Sizes.s20,
+                  paddingVertical: 0,
                 }}
                 placeholder="Passcode"
                 value={this.state.passCode}
-                keyboardType='numeric'
-                onChangeText={(text) => this.setState({ passCode: text })}
-
+                keyboardType="numeric"
+                onChangeText={(text) => this.setState({passCode: text})}
               />
             </View>
-
             <View
               style={{
                 width: '80%',
@@ -279,8 +311,10 @@ export default class LoginComponent extends React.Component {
                 marginTop: Sizes.s15,
                 marginLeft: Sizes.s25,
               }}>
-              <Text style={{ color: colors.red, fontWeight: 'bold' }}>
-                {this.state.passCode === '' ? 'Passcode không được để trống!' : ''}
+              <Text style={{color: colors.red, fontWeight: 'bold'}}>
+                {this.state.passCode === ''
+                  ? 'Passcode không được để trống!'
+                  : ''}
               </Text>
             </View>
 
@@ -289,31 +323,64 @@ export default class LoginComponent extends React.Component {
                 alignSelf: 'center',
                 width: '70%',
                 paddingTop: Sizes.s40,
-              }}>
-              <TouchableOpacity
-                style={{
-                  width: '100%',
-                  borderRadius: Sizes.s25,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: 'blue',
-                  padding: Sizes.s15,
-                }}
-                disabled={this.state.passCode == '' ? true : false}
-                onPress={() => this.onLogin()}>
-                <Text style={{ color: 'white' }}>Đăng nhập</Text>
-              </TouchableOpacity>
-            </View>
+              }}></View>
 
-            <TouchableOpacity
-              style={{ alignItems: 'center', marginTop: Sizes.s5 }}
+            {/* <TouchableOpacity
+              style={{alignItems: 'center', marginTop: Sizes.s5}}
               onPress={() => {
-                this.setState({ opacityView: true, visibleRegister: true });
+                this.setState({opacityView: true, visibleRegister: true});
               }}>
-              <Text style={{ fontWeight: 'bold' }}>Đăng ký thiết bị</Text>
-            </TouchableOpacity>
+              <Text style={{fontWeight: 'bold'}}>Đăng ký thiết bị</Text>
+            </TouchableOpacity> */}
           </View>
         </ScrollView>
+        <View>
+          <TouchableOpacity
+            disabled={this.state.passCode == '' ? true : false}
+            onPress={() => this.onLogin()}
+            style={{
+              width: '90%',
+              backgroundColor: '#1890FF',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: Sizes.s20,
+              padding: Sizes.s20,
+              borderRadius: Sizes.s15,
+              alignSelf: 'center',
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                fontSize: Sizes.h34,
+              }}>
+              Đăng Nhập
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: '90%',
+              backgroundColor: '#8C8C8C',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: Sizes.s20,
+              padding: Sizes.s20,
+              borderRadius: Sizes.s15,
+              alignSelf: 'center',
+            }}
+            onPress={() => {
+              this.setState({opacityView: true, visibleRegister: true});
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                fontSize: Sizes.h34,
+              }}>
+              Đăng Ký Thiết Bị
+            </Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     );
   }
@@ -322,5 +389,16 @@ export default class LoginComponent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  sizeContentItem: {
+    width: '80%',
+    margin: Sizes.s10,
+    padding: Sizes.s15,
+    borderWidth: 1,
+    borderColor: '#8C8C8C',
+    borderRadius: Sizes.s15,
+    paddingHorizontal: Sizes.s15,
+    alignSelf: 'center',
+    backgroundColor: 'white',
   },
 });

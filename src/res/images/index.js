@@ -88,6 +88,11 @@ const images = {
   name_hide_pass: "eye-slash",
   name_info: "info-circle",
 
-  ic_fis: require("./ic_fis.png")
+  ic_fis: require("./ic_fis.png"),
+//NCQ
+  bg_login1: require("./login1Background.png"),
+  ic_main: require("./ic_main.png")
+
+
 };
 export default images;

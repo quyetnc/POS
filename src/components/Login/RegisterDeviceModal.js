@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  Image
 } from 'react-native';
-import { Sizes } from '@dungdang/react-native-basic';
+import {Sizes} from '@dungdang/react-native-basic';
 import Picker from '../Custom/Picker';
-import { colors } from '../../res/values/styles/color';
+import images from '../../res/images/index';
 
 export default class RegisterDeviceModal extends Component {
   constructor(props) {
@@ -41,69 +42,112 @@ export default class RegisterDeviceModal extends Component {
                     backgroundColor: 'white',
                     justifyContent: 'center',
                   }}>
+                    <View style={{flex: 0.45}}>
+                      <Text style={{textAlign: 'center',fontSize:Sizes.h65,fontWeight: 'bold'}}>POS</Text>
+                      <Image source={images.ic_fpt_is} resizeMode='contain' style={{alignSelf:'center',width:'30%'}}/>
+                    </View>
+                  <View
+                    style={{
+                      width: '80%',
+                      fontSize: Sizes.h15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    <Text>Khách sạn :</Text>
+                  </View>
                   <Picker
                     style={{
                       width: '80%',
                       alignSelf: 'center',
-                      borderRadius: Sizes.s35,
-                      borderColor: colors.black,
+                      backgroundColor: 'white',
+                      borderRadius: Sizes.s15,
+                      elevation: Sizes.s15,
+                      // borderColor: colors.black,
                     }}
                     data={this.props.valueProperty} //lable
                     noDataMessage="Dữ Liệu Trống"
                     placeholder="Chọn Property"
-                    title="Chọn Property"
+                    title="Chọn Khách Sạn"
                     value={this.props.propertySelection}
                     onChangeItem={(item) =>
                       this.props.setPropertySelection(item)
                     }
                   />
+                  <View
+                    style={{
+                      width: '80%',
+                      fontSize: Sizes.h15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    <Text>Nhà hàng :</Text>
+                  </View>
                   <Picker
                     style={{
                       width: '80%',
                       alignSelf: 'center',
-                      borderRadius: Sizes.s35,
-                      borderColor: colors.black,
+                      backgroundColor: 'white',
+                      borderRadius: Sizes.s15,
+                      elevation: Sizes.s15,
+                      // borderColor: colors.black,
                     }}
                     data={this.props.valueOutlet} //lable
                     noDataMessage="Dữ Liệu Trống"
                     placeholder="Chọn Outlet"
-                    title="Chọn Outlet"
+                    title="Chọn Nhà Hàng"
                     value={this.props.outletSelection}
                     onChangeItem={(item) => this.props.setOutletSelection(item)}
                   />
                 </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    marginBottom: Sizes.s25,
-                  }}>
+
+                <View>
                   <TouchableOpacity
-                    onPress={() => this.props.offModal()}
-                    style={{
-                      padding: Sizes.s20,
-                      backgroundColor: 'orange',
-                      borderRadius: Sizes.s30,
-                      marginRight: Sizes.s20,
-                      width: '35%',
-                      alignItems: 'center',
-                    }}>
-                    <Text style={{ color: 'white' }}>Hủy</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      padding: Sizes.s20,
-                      backgroundColor: 'blue',
-                      borderRadius: Sizes.s30,
-                      marginRight: '10%',
-                      width: '35%',
-                      alignItems: 'center',
-                    }}
+                    disabled={this.state.passCode == '' ? true : false}
                     onPress={() => {
                       this.props.postRegisterDevicee();
                       this.props.offModal();
+                    }}
+                    style={{
+                      width: '90%',
+                      backgroundColor: '#1890FF',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: Sizes.s20,
+                      padding: Sizes.s20,
+                      borderRadius: Sizes.s15,
+                      alignSelf: 'center',
                     }}>
-                    <Text style={{ color: 'white' }}>Đăng ký</Text>
+                    <Text
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#FFFFFF',
+                        fontSize: Sizes.h34,
+                      }}>
+                      Đăng Ký
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      width: '90%',
+                      backgroundColor: '#8C8C8C',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: Sizes.s20,
+                      padding: Sizes.s20,
+                      borderRadius: Sizes.s15,
+                      alignSelf: 'center',
+                    }}
+                    onPress={() => {
+                      this.props.offModal();
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#FFFFFF',
+                        fontSize: Sizes.h34,
+                      }}>
+                      Quay lại trang trước
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -145,10 +189,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Sizes.s10,
   },
   modal: {
-    height: '40%',
-    borderRadius: Sizes.s40,
+    height: '100%',
+    // borderRadius: Sizes.s40,
     backgroundColor: 'white',
-    width: '80%',
+    width: '100%',
     alignSelf: 'center',
   },
 });

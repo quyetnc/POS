@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import HomeComponent from '../../components/Home/HomeComponent'
 // import { getAllTableMapAction } from '../../redux/actions/Table/TableAction'
-import { getLocationTableAction } from '../../redux/actions/Location_Table/LocationTableAction';
+import { getAllLocation } from '../../redux/actions/Location/LocationAction';
 export class HomeContainer extends Component {
     render() {
         return (
@@ -12,15 +12,15 @@ export class HomeContainer extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        getLocationTableReducers: state.getLocationTableReducers
+        getLocationReducers: state.getLocationReducers
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        onGetLocationTableAction: () => {
-            dispatch(getLocationTableAction());
+        onGetLocationAction: () => {
+            dispatch(getAllLocation());
         }
     };
 };

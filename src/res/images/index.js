@@ -28,7 +28,7 @@ const images = {
   ic_news: require("./ic_news.png"),
   ic_add: require("./ic_add.png"),
   ic_wfh: require("./ic_wfh.png"),
-
+  ic_cancel: require("./ic_cancel.png"),
   ic_onsite: require("./ic_onsite.png"),
   ic_email: require("./ic_email.png"),
   ic_erev: require("./ic_erev.png"),

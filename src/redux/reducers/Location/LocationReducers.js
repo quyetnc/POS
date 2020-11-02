@@ -2,7 +2,7 @@ import *as Types from '../../actions/Location/LocationAction';
 
 var intialState = [];
 
-const LocationReducers = (state = intialState, action) => {
+const getLocationReducers = (state = intialState, action) => {
     try {
         switch (action.type) {
             case Types.GET_LOCATION_SUCCESS:
@@ -21,4 +21,4 @@ const LocationReducers = (state = intialState, action) => {
     }
 }
 
-export default LocationReducers;
+export default getLocationReducers;

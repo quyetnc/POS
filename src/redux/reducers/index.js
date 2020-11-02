@@ -1,8 +1,8 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import allPropertyReducers from './Login/AllPropertyReducers';
 import outletReducers from './Login/OutletReducers';
 import registerDeviceReducers from './Login/RegisterDeviceReducers';
-import getLocationTableReducers from './LocationTable/LocationTableReducers';
+import getLocationReducers from './Location/LocationReducers';
 import getFindGuestReducers from './FindGuest/FindGuestReducers';
 import checkDeviceReducers from './Login/CheckRegisterReducer';
 import getFindTransactionReducers from './FindTransaction/FindTrasactionReducers';
@@ -14,7 +14,7 @@ const allReducers = combineReducers({
   allPropertyReducers,
   outletReducers,
   registerDeviceReducers,
-  getLocationTableReducers,
+  getLocationReducers,
   checkDeviceReducers,
   getFindGuestReducers,
   getFindTransactionReducers,

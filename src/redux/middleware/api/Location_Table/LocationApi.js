@@ -1,38 +1,37 @@
-import { userData, API_URL, userOutLet } from '../../../../config/settings';
+// import { userData, API_URL, userOutLet } from '../../../../config/settings';
 
-export async function getLocation() {
-    const TOKEN = userData.TOKEN;
-    // console.log(TOKEN);
+// export async function getLocation() {
+//     const TOKEN = userData.TOKEN;
+//     // console.log(TOKEN);
 
-    const body = {
-        PROPERTY_CODE: userData.PROPERTY_CODE,
-        OUTLET_ID: userData.OUTLET_ID
-    }
+//     const body = {
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-        'Authorization', `${TOKEN}`
-    );
+//     }
 
-    const response = await fetch(
-        `${API_URL}Location/loadDataPosPlan/`,
+//     var myHeaders = new Headers();
+//     myHeaders.append("Content-Type", "application/json");
+//     myHeaders.append(
+//         'Authorization', `${TOKEN}`
+//     );
 
-        {
-            method: 'POST',
-            headers: myHeaders,
-            body: JSON.stringify(body),
-        },
-    )
-        .then((response) => response.json())
-        .then((result) => {
+//     const response = await fetch(
+//         `${API_URL}Location/loadDataPosPlan/`,
 
-            // console.log('ApiNew:', result);
-            return result;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    return response;
+//         {
+//             method: 'POST',
+//             headers: myHeaders,
+//             body: JSON.stringify(body),
+//         },
+//     )
+//         .then((response) => response.json())
+//         .then((result) => {
 
-}
+//             // console.log('ApiNew:', result);
+//             return result;
+//         })
+//         .catch((error) => {
+//             console.log(error);
+//         });
+//     return response;
+
+// }

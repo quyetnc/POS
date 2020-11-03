@@ -95,8 +95,10 @@ const images = {
   ic_fis: require("./ic_fis.png"),
   //NCQ
   bg_login1: require("./login1Background.png"),
-  ic_main: require("./ic_main.png")
-
-
+  ic_main: require("./ic_main.png"),
+  ic_user_home : require("./icon_user.png"),
+  ic_time : require("./icon_time.png"),
+  ic_money : require("./icon_money.png"),
+  ic_waiter: require("./icon_waiter.png"),
 };
 export default images;

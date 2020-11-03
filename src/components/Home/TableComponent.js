@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   View,
@@ -7,10 +7,14 @@ import {
   Modal,
   TextInput,
   TouchableWithoutFeedback,
+  Dimensions,
+  Image,
 } from 'react-native';
-import { Sizes } from '@dungdang/react-native-basic';
+import {Sizes} from '@dungdang/react-native-basic';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
+import images from '../../res/images/index';
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 class TableComponent extends Component {
   constructor(props) {
     super(props);
@@ -40,21 +44,20 @@ class TableComponent extends Component {
     }
   };
   onChangeNameGuest = (input) => {
-    this.setState({ nameGuest: input });
+    this.setState({nameGuest: input});
   };
 
   onChangeCountGuest = (input) => {
-    this.setState({ countGuest: input });
+    this.setState({countGuest: input});
   };
   showInfoGuest = () => {
-    console.log('Checkid',this.props.item.CHECK_ID);
+    console.log('Checkid', this.props.item.CHECK_ID);
     // console.log('ITEM CHECK: ', this.props.item);
     this.props.item.CHECK_ID !== 0
       ? this.props.navigation.navigate('OrderItemScreen', {
-       
-        checkID: this.props.item.CHECK_ID,
-        guestInfo: this.props.item,
-      })
+          checkID: this.props.item.CHECK_ID,
+          guestInfo: this.props.item,
+        })
       : this.openModal();
   };
   openModal = () => {
@@ -68,43 +71,98 @@ class TableComponent extends Component {
     });
   };
   openTable = () => {
-    const { nameGuest, countGuest } = this.state;
+    const {nameGuest, countGuest} = this.state;
     if (nameGuest == '' || countGuest == 0) {
       return alert('vui lòng nhập thông tin!');
     }
     this.props.navigation.navigate('OrderItemScreen', {
       checkID: this.props.item.CHECK_ID,
       guestInfo: this.props.item,
-    })
+    });
     this.hideModal();
-
-  }
+  };
   render() {
-    const { visibleInfoGuest } = this.state;
+    const {visibleInfoGuest} = this.state;
 
     return (
       <View style={styles.table} key={this.props.key}>
         <TouchableOpacity
+          styles={{elevation: 5, borderWidth: 0.5}}
           onPress={() => {
             this.showInfoGuest();
           }}>
           <View style={styles.headerTable}>
-            <Text>{this.props.NAME}</Text>
+            <View />
 
-            <Text>{this.decimalHoursToString(this.props.MINUTE_ORDER)}</Text>
-            <Icon name="ellipsis-v" size={20} color="black" />
+            {/* <Text>{this.decimalHoursToString(this.props.MINUTE_ORDER)}</Text> */}
+            <Text>Bàn {this.props.NAME}</Text>
+            {/* <Icon name="ellipsis-v" size={20} color="black" /> */}
+            <View />
           </View>
-          <View style={styles.contentTable}>
-            <Text>{this.props.GUEST_NAME}</Text>
-            <Text>{this.props.WAITER}</Text>
-            <Text>{this.currencyFormat(this.props.BALANCE) ?? ''}</Text>
-          </View>
+          {this.props.CHECK_ID != 0 ? (
+            <View style={styles.contentTable}>
+              <View style={styles.lineContent}>
+                <Image
+                  style={styles.iconContent}
+                  resizeMode="contain"
+                  source={images.ic_user_home}
+                />
+                <View style={styles.txtContent}>
+                  <Text style={styles.textContent}>
+                    {this.props.GUEST_NAME}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.lineContent}>
+                <Image
+                  style={styles.iconContent}
+                  resizeMode="contain"
+                  source={images.ic_time}
+                />
+                <View style={styles.txtContent}>
+                  <Text style={styles.textContent}>
+                    {this.decimalHoursToString(this.props.MINUTE_ORDER)}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.lineContent}>
+                <Image
+                  style={styles.iconContent}
+                  resizeMode="contain"
+                  source={images.ic_money}
+                />
+                <View style={styles.txtContent}>
+                  <Text style={[styles.textContent, {color: '#FF4D4F'}]}>
+                    {this.currencyFormat(this.props.BALANCE)}
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.lineContent}>
+                <Image
+                  style={styles.iconContent}
+                  resizeMode="contain"
+                  source={images.ic_waiter}
+                />
+                <View style={styles.txtContent}>
+                  <Text style={styles.textContent}>{this.props.WAITER}</Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View
+              style={[
+                styles.contentTable,
+                {justifyContent: 'center', alignItems: 'center'},
+              ]}>
+              <Text style={{}}>Trống</Text>
+            </View>
+          )}
         </TouchableOpacity>
         <Modal
           visible={visibleInfoGuest}
           transparent={true}
           animationType="fade">
-          <View style={{ flex: 1, backgroundColor: '#00000050' }}></View>
+          <View style={{flex: 1, backgroundColor: '#00000050'}}></View>
         </Modal>
 
         <Modal
@@ -159,11 +217,11 @@ class TableComponent extends Component {
                         width: '35%',
                         alignItems: 'center',
                       }}>
-                      <Text style={{ color: 'white' }}>Cancel</Text>
+                      <Text style={{color: 'white'}}>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        this.openTable()
+                        this.openTable();
                       }}
                       style={{
                         padding: Sizes.s10,
@@ -173,7 +231,7 @@ class TableComponent extends Component {
                         width: '35%',
                         alignItems: 'center',
                       }}>
-                      <Text style={{ color: 'white' }}>OK</Text>
+                      <Text style={{color: 'white'}}>OK</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -189,33 +247,36 @@ class TableComponent extends Component {
 const styles = StyleSheet.create({
   table: {
     flex: 1 / 2,
-    width: '48%',
-    borderRadius: Sizes.s100,
+    width: '45%',
+    height: screenWidth / 2.5,
+    borderRadius: Sizes.s10,
     marginBottom: Sizes.s25,
-    padding: Sizes.s10,
+    margin: Sizes.s10,
+    borderRadius: Sizes.s10,
+    backgroundColor: 'white',
   },
   headerTable: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: Sizes.s10,
     paddingVertical: Sizes.s10,
-    borderTopStartRadius: Sizes.s10,
-    borderTopEndRadius: Sizes.s10,
+    height: '20%',
+    alignItems: 'center',
+    borderBottomWidth: 0.5,
+    borderColor: '#E8E8E8',
   },
   contentTable: {
-    backgroundColor: '#cccccc',
     flexDirection: 'column',
-    alignItems: 'center',
-    padding: Sizes.s20,
-    borderBottomLeftRadius: Sizes.s10,
-    borderBottomRightRadius: Sizes.s10,
+    paddingHorizontal: Sizes.s20,
+    height: '80%',
+    justifyContent: 'center',
   },
   CustomModal: {
     backgroundColor: 'white',
     width: '85%',
     alignSelf: 'center',
-    borderRadius: 10
+    borderRadius: 10,
   },
   input: {
     borderColor: 'gray',
@@ -231,6 +292,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: Sizes.s15,
     borderColor: '#EFEFEF',
+  },
+  lineContent: {
+    flexDirection: 'row',
+    marginBottom: Sizes.s10,
+  },
+  iconContent: {width: Sizes.s40, height: Sizes.s40},
+  txtContent: {
+    justifyContent: 'center',
+
+    marginLeft: Sizes.s15,
+    borderBottomWidth: 1,
+    flex: 1,
+    borderColor: '#E8E8E8',
   },
 });
 export default TableComponent;

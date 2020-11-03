@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {FlatList, SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  View,
+  Text,
+  Button,
+  StyleSheet,
+} from 'react-native';
 // import Table from "../table";
 import Table from '../Home/TableComponent';
 
@@ -7,13 +14,27 @@ class TabItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.tableData.filter(
-        (item) => item.LOCATION_ID === this.props.tabData.LOCATION_ID,
-      ),
+      data: [],
       //data: []
     };
   }
-
+  componentDidMount() {
+    this.setState({
+      data: this.props.tableData.filter(
+        (item) => item.LOCATION_ID === this.props.tabData.LOCATION_ID,
+      ),
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.tabData !== this.props.tabData) {
+      console.log(this.props.tabData);
+      this.setState({
+        data: this.props.tableData.filter(
+          (item) => item.LOCATION_ID === this.props.tabData.LOCATION_ID,
+        ),
+      });
+    }
+  }
   // componentDidMount() {
   //   console.log("this.props.tabData: ", this.props.tabData);
   //   this.loadTable();
@@ -61,12 +82,12 @@ class TabItem extends Component {
     );
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.tabData.LOCATION_ID === this.props.tabData.LOCATION_ID)
-      return false;
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (nextProps.tabData.LOCATION_ID === this.props.tabData.LOCATION_ID)
+  //     return false;
 
-    return true;
-  }
+  //   return true;
+  // }
 
   render() {
     return (

@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import allPropertyReducers from './Login/AllPropertyReducers';
 import outletReducers from './Login/OutletReducers';
 import registerDeviceReducers from './Login/RegisterDeviceReducers';
@@ -10,6 +10,7 @@ import detailOrderReducers from './OrderItem/PostGetDetailOrderReducers';
 import categoryMenuReducers from './OrderItem/PostGetCategoryMenuReducers';
 import fullMenuReducers from './OrderItem/PostGetFullMenuReducers';
 import postInsertOrderReducers from './OrderItem/PostInsertOrderReducers';
+import tableMapReducers from './Table/TableMapReducers';
 const allReducers = combineReducers({
   allPropertyReducers,
   outletReducers,
@@ -22,6 +23,7 @@ const allReducers = combineReducers({
   fullMenuReducers,
   categoryMenuReducers,
   postInsertOrderReducers,
+  tableMapReducers,
 });
 
 export default allReducers;

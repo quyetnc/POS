@@ -1,26 +1,38 @@
-import { API_URL } from '../../../../config/settings'
+import { userData, API_URL, userOutLet } from '../../../../config/settings';
 
-export async function getTable() {
-    let dataPost = { "PROPERTY_CODE": "LAR", "OUTLET_ID": 1124 }
+export async function getTableAPI() {
+    const TOKEN = userData.TOKEN;
+    // console.log(TOKEN);
+
+    const body = {
+        PROPERTY_CODE: userData.PROPERTY_CODE,
+        OUTLET_ID: userData.OUTLET_ID
+    }
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
-        'Authorization',
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ijg1IiwibmJmIjoxNjAyNDkzNDgzLCJleHAiOjE2MDI1Nzk4ODMsImlhdCI6MTYwMjQ5MzQ4M30.DeRIZBLW3IeSV_wJRYDkdW3RAL48phb69Ev39E1_9Hg',
+        'Authorization', `${TOKEN}`
     );
 
-    const response = await fetch(`${API_URL}Location/loadDataPosPlan/`, {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(dataPost),
-    })
+    const response = await fetch(
+        `${API_URL}Table/getDataPosPlan/`,
+
+        {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(body),
+        },
+    )
         .then((response) => response.json())
         .then((result) => {
+
+            // console.log('ApiNew:', result);
             return result;
         })
         .catch((error) => {
             console.log(error);
         });
     return response;
-}
 
+}

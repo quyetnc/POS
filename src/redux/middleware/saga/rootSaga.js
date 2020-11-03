@@ -10,6 +10,7 @@ import { watchGetDetailOrder } from './OrderItem/postGetDetailOrderSaga';
 import { watchGetCategoryMenu } from './OrderItem/PostGetCategoryMenuSaga';
 import { watchGetFullMenu } from './OrderItem/PostGetFullMenuSaga';
 import { watchPostInsertOrder } from './OrderItem/PostInsertOrderSaga'
+import {watchGetTable} from './Table/getTableSaga';
 export default function* rootSaga() {
   yield all([
     watchAllProperty(),
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     watchGetDetailOrder(),
     watchGetCategoryMenu(),
     watchGetFullMenu(),
-    watchPostInsertOrder()
+    watchPostInsertOrder(),
+    watchGetTable()
   ]);
 }

@@ -32,7 +32,7 @@ export default class HomeComponent extends Component {
       loading: true,
       nameLocation: '',
       modalLocation: false,
-
+      selectedItem: null,
     };
   }
 
@@ -44,9 +44,9 @@ export default class HomeComponent extends Component {
       if (!objectIsNull(this.props.getLocationReducers)) {
         await this.setState({
           dataLocation: this.props.getLocationReducers,
-          nameLocation: 'Khu' + ' ' + this.props.getLocationReducers[0].NAME
-        });
-
+          nameLocation: 'Khu' + ' ' + this.props.getLocationReducers[0].NAME,
+          selectedItem: this.props.getLocationReducers[0],
+        })
       }
 
     }
@@ -58,21 +58,12 @@ export default class HomeComponent extends Component {
     });
   }
   renderItem = ({ item, index }) => (
-    <TouchableOpacity key={index} style={{
-      marginHorizontal: Sizes.h38,
-      paddingTop: Sizes.h32,
-      paddingBottom: Sizes.h16,
-      borderBottomColor: '#E8E8E8',
-      borderBottomWidth: 1,
-      alignItems: 'center',
-
-      // backgroundColor: 'red'
-    }}>
-      <Text>{'Khu' + ' ' + item.NAME}</Text>
+    <TouchableOpacity key={index} style={styles.itemLocation} onPress={() => { this.setState({ selectedItem: item, nameLocation: 'Khu' + ' ' + item.NAME }) }}>
+      <Text style={[{ fontSize: Sizes.s30 }, this.state.selectedItem == item ? { fontWeight: 'bold', color: '#0294e1' } : { fontWeight: 'bold', color: '#000' },]}>{'Khu' + ' ' + item.NAME}</Text>
     </TouchableOpacity>
   )
   render() {
-    const { nameLocation, modalLocation, dataLocation } = this.state;
+    const { nameLocation, modalLocation, dataLocation, selectedItem } = this.state;
 
     return (
       <View style={styles.container}>
@@ -92,12 +83,14 @@ export default class HomeComponent extends Component {
         <Modal
           animationType="slide"
           transparent={true}
-          visible={!modalLocation}
+          visible={modalLocation}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <View style={styles.modalTitle}>
-                <Image source={images.ic_cancel} resizeMode='contain' style={{ width: Sizes.s25 }} />
+                <TouchableOpacity onPress={() => this.setState({ modalLocation: false })} style={{ paddingHorizontal: 10 }}>
+                  <Image source={images.ic_cancel} resizeMode='contain' style={{ width: Sizes.s25 }} />
+                </TouchableOpacity>
                 <Text style={{ marginLeft: Sizes.s25, fontWeight: 'bold', textAlignVertical: 'center' }}>Chọn khu vực</Text>
               </View>
               <FlatList
@@ -173,7 +166,15 @@ const styles = StyleSheet.create({
   modalTitle: {
     flexDirection: 'row',
     paddingHorizontal: Sizes.s30,
-    borderBottomColor: 'grey',
-    borderBottomWidth: 0.5,
+    borderBottomColor: '#E8E8E8',
+    borderBottomWidth: 1,
+  },
+  itemLocation: {
+    marginHorizontal: Sizes.h38,
+    paddingTop: Sizes.h32,
+    paddingBottom: Sizes.h16,
+    borderBottomColor: '#E8E8E8',
+    borderBottomWidth: 1,
+    alignItems: 'center',
   }
 });

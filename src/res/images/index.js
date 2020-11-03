@@ -65,6 +65,10 @@ const images = {
   swipe: require("./swipe.png"),
   swipe2: require("./swipe2.png"),
   swipe3: require("./swipe3.png"),
+  ic_change_out_let: require("./ic_change_out_let.png"),
+  ic_about: require("./ic_about.png"),
+  ic_find_guest: require("./ic_find_guest.png"),
+  ic_transaction: require("./ic_find_transaction.png"),
   name_check_history: "calendar-check",
   reload: "redo-alt",
   name_back: "chevron-left",
@@ -89,7 +93,7 @@ const images = {
   name_info: "info-circle",
 
   ic_fis: require("./ic_fis.png"),
-//NCQ
+  //NCQ
   bg_login1: require("./login1Background.png"),
   ic_main: require("./ic_main.png")
 

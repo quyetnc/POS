@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Image, View, Text} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import { Button, Image, View, Text, TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import LoginContainer from './Login/LoginContainer';
 import demo from '../components/Custom/demo';
@@ -18,19 +18,33 @@ import FindGuestContainer from './Action/FindGuestContainer';
 import FindTransactionContainer from './Action/FindTransactionContainer';
 import FillCodeContainer from './Login/FillCodeContainer';
 import ConfirmApiContainer from './Login/ConfirmApiContainer';
-
+import images from '../res/images';
+import { Sizes } from '@dungdang/react-native-basic'
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
 function CustomDrawerContent({ navigation }) {
   return (
-    <Button
-      title="Go somewhere"
-      onPress={() => {
-        // Navigate using the `navigation` prop that you received
-        navigation.navigate('Action');
-      }}
-    />
+    // <Button
+    //   title="Go somewhere"
+    //   onPress={() => {
+    //     // Navigate using the `navigation` prop that you received
+    //     navigation.navigate('Action');
+    //   }}
+    // />
+    <View>
+      <TouchableOpacity >
+        <Image source={images.ic_change_out_let} resizeMode='contain' style={{ width: Sizes.s25 }} />
+        <Text>Change outlet</Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Image source={images} />
+        <Text>Change outlet</Text>
+      </TouchableOpacity>
+    </View>
+
+
   );
 }
 const MainStackScreen = () => (
@@ -45,7 +59,7 @@ const MainStackScreen = () => (
         component={FillCodeContainer}
         options={{}}
       />
- <Stack.Screen
+      <Stack.Screen
         name="ConfirmApi"
         component={ConfirmApiContainer}
         options={{}}
@@ -76,9 +90,10 @@ const MainStackScreen = () => (
 const MainDraverScreen = () => {
   return (
     <Drawer.Navigator initialRouteName="Homee" drawerContent={(props) => <CustomDrawerContent {...props} />}>
-    <Drawer.Screen name="Homee" component={homeNavigation} />
-    <Drawer.Screen name="Action" component={actionNavigation} />
-  </Drawer.Navigator>
+      <Drawer.Screen name="Homee" component={homeNavigation} />
+      <Drawer.Screen name="Action" component={actionNavigation} />
+      <Drawer.Screen name="ChangeOutLet" component={changeOutLetNavigation} />
+    </Drawer.Navigator>
   )
 }
 const MainTabScreen = () => {
@@ -96,7 +111,7 @@ const MainTabScreen = () => {
         component={homeNavigation}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
           ),
         }}
@@ -107,7 +122,7 @@ const MainTabScreen = () => {
         component={actionNavigation}
         options={{
           tabBarLabel: 'Action',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="vector-combine" color={color} size={26} />
           ),
         }}
@@ -117,7 +132,7 @@ const MainTabScreen = () => {
         component={settingNavigation}
         options={{
           tabBarLabel: 'Setting',
-          tabBarIcon: ({color}) => <Icon2 name="cog" color={color} size={26} />,
+          tabBarIcon: ({ color }) => <Icon2 name="cog" color={color} size={26} />,
         }}
       />
     </Tab.Navigator>
@@ -127,7 +142,7 @@ const MainTabScreen = () => {
 const homeNavigation = (props) => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeContainer} options={{}} />
     </Stack.Navigator>
@@ -137,17 +152,22 @@ const homeNavigation = (props) => {
 const actionNavigation = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Action">
       <Stack.Screen name="Action" component={ActionContainer} options={{}} />
     </Stack.Navigator>
   );
 };
+const changeOutLetNavigation = () => {
+  <Stack.Navigator>
+    {this.props.goback()}
+  </Stack.Navigator>
+}
 
 const settingNavigation = () => {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{ headerShown: false }}
       initialRouteName="Setting">
       <Stack.Screen name="Setting" component={SettingContainer} options={{}} />
     </Stack.Navigator>

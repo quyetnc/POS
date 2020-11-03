@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
   },
   IconDraw: {
     position: 'absolute',
-    left: Sizes.s30,
-
+    left: Sizes.s10,
+    padding: Sizes.s20
   },
   content: {
     flex: 1,
@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '65%',
     backgroundColor: "white",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

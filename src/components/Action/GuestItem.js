@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Image } from 'react-native'
 import { Sizes } from '@dungdang/react-native-basic'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import images from '../../res/images/index';
 
 const GuestItem = props => {
     const currencyFormat = (num) => {
@@ -14,19 +14,21 @@ const GuestItem = props => {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row' }}>
-                <View style={{ width: Sizes.s60, justifyContent: 'center', marginLeft: 10 }}>
-                    <Icon name='user-circle' size={Sizes.s35} color={props.color} />
-                </View>
+                <Image source={images.ic_guest} resizeMode='contain' style={{ width: Sizes.s100, height: Sizes.s200, marginRight: Sizes.s25 }} />
                 <View style={styles.guest}>
-                    <Text style={{ fontWeight: 'bold' }}>{props.FULL_NAME}</Text>
-                    <Text>{props.CONFIRMATION_NO}</Text>
-                    <Text>{props.RESV_STATUS}</Text>
+                    <View style={{ marginTop: Sizes.s20 }}>
+                        <Text style={{ fontWeight: 'bold' }}>{props.FULL_NAME}</Text>
+                        <Text style={{ paddingVertical: Sizes.s10 }}>{props.CONFIRMATION_NO}</Text>
+                        <Text>{props.RESV_STATUS}</Text>
+                    </View>
+                    <View style={{ marginTop: Sizes.s20 }}>
+                        <Text style={{ textAlign: 'right', paddingVertical: Sizes.s10 }}>Phòng {props.ROOM_CODE}</Text>
+                        <Text style={{ textAlign: 'right', color: 'red' }}>{currencyFormat(props.BALANCE)}</Text>
+                    </View>
                 </View>
+
             </View>
-            <View >
-                <Text style={{ textAlign: 'right' }}>{props.ROOM_CODE}</Text>
-                <Text style={{ textAlign: 'right' }}>{currencyFormat(props.BALANCE)}</Text>
-            </View>
+
         </View>
     )
 }
@@ -36,11 +38,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 10,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 0.5
     },
     guest: {
-
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: '#E8E8E8',
+        borderBottomWidth: 1,
+        width: '83%',
     }
 });
 export default GuestItem;

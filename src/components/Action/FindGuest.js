@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, FlatList, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import { Sizes } from '@dungdang/react-native-basic'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/AntDesign'
 import GuestItem from './GuestItem'
 import { objectIsNull, arrayIsEmpty, stringIsEmpty } from '@dungdang/react-native-basic/src/Functions';
 
@@ -56,17 +56,17 @@ class FindGuest extends Component {
             data={data}
             keyExtractor={(item, index) => index}
             renderItem={this.renderItem}
-        />) : (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" color="#00ff00" /></View>)
+        />) : (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" color="#1890FF" /></View>)
         return (
             <View style={styles.container}>
+
                 <SafeAreaView style={styles.header}>
-                    <TouchableOpacity style={{ position: 'absolute', left: 0, marginLeft: 10 }} onPress={() => this.props.navigation.goBack()}>
-                        <Icon name='arrow-left' size={20} color='white' />
+                    <TouchableOpacity style={{ position: 'absolute', left: 0, padding: Sizes.s15 }} onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='left' size={20} color='white' />
                     </TouchableOpacity>
                     <Text style={styles.titile}>Find Guest</Text>
                 </SafeAreaView>
                 {showContent}
-
             </View>
         )
     }
@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
     },
     header: {
         height: Sizes.s100,
-        backgroundColor: '#4dbd73',
+        backgroundColor: '#1890FF',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
     titile: {
         color: '#fff',
-        fontSize: Sizes.h24,
+        fontSize: Sizes.h32,
         fontWeight: 'bold',
     },
 });

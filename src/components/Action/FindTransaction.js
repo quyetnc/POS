@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, FlatList, ActivityIndicator } from 'react-native'
 import { Sizes } from '@dungdang/react-native-basic'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/AntDesign'
 import { objectIsNull, arrayIsEmpty, stringIsEmpty } from '@dungdang/react-native-basic/src/Functions';
 import TransactionItem from './TransactionItem';
 
@@ -18,7 +18,7 @@ class FindTransaction extends Component {
 
     async componentDidMount() {
         await this.props.onGetFindTransactionAction();
-     
+
     }
 
     async componentDidUpdate(prevProps) {
@@ -29,7 +29,7 @@ class FindTransaction extends Component {
                     isLoading: true,
                     refreshing: false
                 })
-              
+
             }
         }
     }
@@ -40,7 +40,6 @@ class FindTransaction extends Component {
     }
     renderItem = ({ item, index }) => (
         <TransactionItem
-            color={index % 2 === 0 ? 'red' : 'green'}
             CHECK_ID={item.CHECK_ID}
             NAME={item.NAME}
             CHECK_NO={item.CHECK_NO}
@@ -58,7 +57,7 @@ class FindTransaction extends Component {
 
     render() {
         const { data, isLoading } = this.state;
-       
+
         const showContent = isLoading === true ? (<FlatList
             onRefresh={() => this.handleRefresh()}
             refreshing={this.state.refreshing}
@@ -66,12 +65,12 @@ class FindTransaction extends Component {
             keyExtractor={(item, index) => index}
             renderItem={this.renderItem}
 
-        />) : (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" color="#00ff00" /></View>)
+        />) : (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator size="large" color="#1890FF" /></View>)
         return (
             <View style={styles.container}>
                 <SafeAreaView style={styles.header}>
-                    <TouchableOpacity style={{ position: 'absolute', left: 0, marginLeft: 10 }} onPress={() => this.props.navigation.goBack()}>
-                        <Icon name='arrow-left' size={20} color='white' />
+                    <TouchableOpacity style={{ position: 'absolute', left: 0, padding: Sizes.s15 }} onPress={() => this.props.navigation.goBack()}>
+                        <Icon name='left' size={20} color='white' />
                     </TouchableOpacity>
                     <Text style={styles.titile}>Find Transaction</Text>
                 </SafeAreaView>
@@ -87,14 +86,14 @@ const styles = StyleSheet.create({
     },
     header: {
         height: Sizes.s100,
-        backgroundColor: '#4dbd73',
+        backgroundColor: '#1890FF',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
     titile: {
         color: '#fff',
-        fontSize: Sizes.h24,
+        fontSize: Sizes.h32,
         fontWeight: 'bold',
     },
 

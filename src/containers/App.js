@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, View, Text, TouchableOpacity, StyleSheet, Switch } from 'react-native';
+import { Image, View, Text, TouchableOpacity, StyleSheet, Switch, StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -64,28 +64,28 @@ function CustomDrawerContent({ navigation }) {
       <View style={styles.headerMenu}>
         <Text style={{ color: '#FFFFFF', fontWeight: 'bold', fontSize: Sizes.h32, }}>Mở Rộng</Text>
       </View>
-      <TouchableOpacity style={styles.customMenu}>
+      <TouchableOpacity style={styles.customMenu} onPress={() => navigation.goBack()}>
         <Image source={images.ic_change_out_let} resizeMode='center' style={{ width: Sizes.s100 }} />
         <View style={styles.viewText}>
           <Text style={{ marginLeft: Sizes.s15 }}>Change outlet</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.customMenu}>
+      <TouchableOpacity onPress={() => navigation.navigate("FindTransaction")} style={styles.customMenu}>
         <Image source={images.ic_transaction} resizeMode='center' style={{ width: Sizes.s100 }} />
         <View style={styles.viewText}>
           <Text style={{ marginLeft: Sizes.s15 }}>Find transaction</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.customMenu}>
+      <TouchableOpacity onPress={() => navigation.navigate("FindGuest")} style={styles.customMenu}>
         <Image source={images.ic_find_guest} resizeMode='center' style={{ width: Sizes.s100 }} />
         <View style={styles.viewText}>
           <Text style={{ marginLeft: Sizes.s15 }}>Find guest</Text>
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.customMenu}>
+      <TouchableOpacity onPress={() => navigation.navigate("About")} style={styles.customMenu}>
         <Image source={images.ic_about} resizeMode='center' style={{ width: Sizes.s100 }} />
         <View style={styles.viewText}>
           <Text style={{ marginLeft: Sizes.s15 }}>About</Text>
@@ -111,9 +111,11 @@ function CustomDrawerContent({ navigation }) {
 }
 const MainStackScreen = () => (
   <NavigationContainer>
+    <StatusBar barStyle='light-content' backgroundColor='#1890FF' />
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+
       }}
       initialRouteName="FillCode">
       <Stack.Screen
@@ -128,7 +130,9 @@ const MainStackScreen = () => (
       />
 
       <Stack.Screen name="Login" component={LoginContainer} options={{}} />
+
       <Stack.Screen name="Home" component={MainDraverScreen} options={{}} />
+
       <Stack.Screen
         name="FindTransaction"
         component={FindTransactionContainer}
@@ -151,10 +155,14 @@ const MainStackScreen = () => (
 
 const MainDraverScreen = () => {
   return (
+
     <Drawer.Navigator initialRouteName="Homee" drawerContent={(props) => <CustomDrawerContent {...props} />}>
+
       <Drawer.Screen name="Homee" component={homeNavigation} />
       <Drawer.Screen name="Action" component={actionNavigation} />
-      <Drawer.Screen name="ChangeOutLet" component={changeOutLetNavigation} />
+      <Drawer.Screen name="About" component={AboutContainer} />
+      <Drawer.Screen name="FindGuest" component={FindGuestContainer} />
+      <Drawer.Screen name="FindTransaction" component={FindTransactionContainer} />
     </Drawer.Navigator>
   )
 }
@@ -206,6 +214,7 @@ const homeNavigation = (props) => {
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName="Home">
+
       <Stack.Screen name="Home" component={HomeContainer} options={{}} />
     </Stack.Navigator>
   );

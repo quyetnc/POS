@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import { Sizes } from '@dungdang/react-native-basic'
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { Sizes } from '@dungdang/react-native-basic';
+import images from '../../res/images/index';
+
 
 const TransactionItem = props => {
     const currencyFormat = (num) => {
@@ -23,20 +24,24 @@ const TransactionItem = props => {
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row' }}>
-                <View style={{ width: Sizes.s60, justifyContent: 'center', marginLeft: 10 }}>
-                    <Icon name='user-circle' size={Sizes.s35} color={props.color} />
-                </View>
+
+                <Image source={images.ic_custom} resizeMode='contain' style={{ width: Sizes.s100, height: Sizes.s200, marginRight: Sizes.s25 }} />
+
                 <View style={styles.transaction}>
-                    <Text style={{ fontWeight: 'bold' }}>{props.GUEST_NAME}</Text>
-                    <Text>{props.CHECK_NO}</Text>
-                    <Text>{decimalHoursToString(props.MINUTE_ORDER)}</Text>
+                    <View style={{ marginTop: Sizes.s20 }}>
+                        <Text style={{ fontWeight: 'bold' }}>{props.GUEST_NAME}</Text>
+                        <Text style={{ textAlign: 'left', paddingVertical: Sizes.s10 }}>Bàn {props.NAME}</Text>
+                        <Text style={{ textAlign: 'left' }}>{props.COVERS} người</Text>
+                    </View>
+                    <View style={{ marginTop: Sizes.s20 }}>
+                        <Text style={{ textAlign: 'right' }}>{decimalHoursToString(props.MINUTE_ORDER)}</Text>
+                        <Text style={{ paddingVertical: Sizes.s10, textAlign: 'right' }}>{props.CHECK_NO}</Text>
+                        <Text style={{ color: 'red', textAlign: 'right' }}>{currencyFormat(props.TOTAL)}</Text>
+                    </View>
                 </View>
+
             </View>
-            <View>
-                <Text style={{ textAlign: 'right' }}>{props.NAME}</Text>
-                <Text style={{ textAlign: 'right' }}>{props.COVERS}</Text>
-                <Text>{currencyFormat(props.TOTAL)}</Text>
-            </View>
+
         </View>
     )
 }
@@ -47,10 +52,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 10,
-        borderBottomColor: 'grey',
-        borderBottomWidth: 0.5
+
     },
     transaction: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomColor: '#E8E8E8',
+        borderBottomWidth: 1,
+        width: '83%',
 
     }
 });

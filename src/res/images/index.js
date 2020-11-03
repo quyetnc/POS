@@ -65,10 +65,8 @@ const images = {
   swipe: require("./swipe.png"),
   swipe2: require("./swipe2.png"),
   swipe3: require("./swipe3.png"),
-  ic_change_out_let: require("./ic_change_out_let.png"),
-  ic_about: require("./ic_about.png"),
-  ic_find_guest: require("./ic_find_guest.png"),
-  ic_transaction: require("./ic_find_transaction.png"),
+
+  ic_custom: require("./ic_custom.png"),
   name_check_history: "calendar-check",
   reload: "redo-alt",
   name_back: "chevron-left",
@@ -91,8 +89,15 @@ const images = {
   name_show_pass: "eye",
   name_hide_pass: "eye-slash",
   name_info: "info-circle",
-
   ic_fis: require("./ic_fis.png"),
+
+
+  //MINH 
+  ic_guest: require("./ic_guest.png"),
+  ic_change_out_let: require("./ic_change_out_let.png"),
+  ic_about: require("./ic_about.png"),
+  ic_find_guest: require("./ic_find_guest.png"),
+  ic_transaction: require("./ic_find_transaction.png"),
   //NCQ
   bg_login1: require("./login1Background.png"),
   ic_main: require("./ic_main.png")
